@@ -39,7 +39,7 @@ var config = function config($stateProvider, $urlRouterProvider) {
     controller: 'EditBillController',
     templateUrl: 'templates/editBill.tpl.html'
   }).state('root.roommates', {
-    url: '/roommates/:id',
+    url: '/roommates/',
     controller: 'RoomController',
     templateUrl: 'templates/room.tpl.html'
   }).state('root.roommates.bills', {
