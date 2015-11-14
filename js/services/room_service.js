@@ -6,15 +6,32 @@ let RoomService = function($http) {
   }
 
   //Display a single roommate
-  
-
-  //Add a new roommate
-  this.addRoommate = function() {
+  this.getRoommate = function() {
 
   }
-  //Delete a roommate
 
+  //Add a new roommate
+  let Roommate = function(obj) {
+    this.name = obj.name;
+    this.email = obj.email;
+    this.phone = obj.phone;
+    this.house_id = obj.house_id;
+  }
+
+  this.addRoommate = function(obj) {
+    let mate = new Roommate(obj);
+
+
+  }
+  
+  //Delete a roommate
+  this.deleteRoommate = function() {
+    return 'deleted from service';
+  }
   //Edit a roommate
+  this.editRoommate = function() {
+    
+  }
  
 };
 
