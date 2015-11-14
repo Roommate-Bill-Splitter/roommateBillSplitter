@@ -1,15 +1,16 @@
 let ChartService = function($http, SERVER) {
 
-  // let url = SERVER.URL + 'classes/';
+
+  let url = SERVER.URL + 'classes/roommate';
 
 
   this.getRoommates = function () {
-    // return $http({
-    //   url: url,
-    //   headers: SERVER.CONFIG.header,
-    //   method: 'GET',
-    //   cache: true
-    // });
+    return $http({
+      url: url,
+      headers: SERVER.CONFIG.header,
+      method: 'GET',
+      cache: true
+    });
 
   };
 

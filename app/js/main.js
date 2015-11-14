@@ -160,10 +160,10 @@ Object.defineProperty(exports, '__esModule', {
 var ChartController = function ChartController($scope, ChartService) {
 
   $scope.title = 'Bill Chart';
-  // //
-  //   ChartService.getRoommates().then ( (res) => {
-  //     $scope.roommates = res.data.results;   
-  //   });
+  //
+  ChartService.getRoommates().then(function (res) {
+    $scope.roommates = res.data.results;
+  });
 };
 
 ChartController.$inject = ['$scope', 'ChartService'];
@@ -465,16 +465,15 @@ Object.defineProperty(exports, '__esModule', {
 });
 var ChartService = function ChartService($http, SERVER) {
 
-  // let url = SERVER.URL + 'classes/';
+  var url = SERVER.URL + 'classes/roommate';
 
   this.getRoommates = function () {
-    // return $http({
-    //   url: url,
-    //   headers: SERVER.CONFIG.header,
-    //   method: 'GET',
-    //   cache: true
-    // });
-
+    return $http({
+      url: url,
+      headers: SERVER.CONFIG.header,
+      method: 'GET',
+      cache: true
+    });
   };
 };
 
