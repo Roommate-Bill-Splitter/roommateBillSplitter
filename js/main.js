@@ -5,6 +5,8 @@ import angular from 'angular';
 import 'angular-ui-router';
 import 'angular-cookies';
 import config from './config';
+import 'sweetalert';
+import 'angular-h-sweetalert';
 //controllers
 import HomeController from './controllers/home_controller';
 import DashController from './controllers/dash_controller';
@@ -27,7 +29,7 @@ import EditRoomController from './controllers/edit_room_controller';
 
 
 angular
-  .module('app', ['ui.router', 'ngCookies'])
+  .module('app', ['ui.router', 'ngCookies', 'hSweetAlert'])
   .constant('SERVER', {
     URL: 'taco',
     CONFIG:{
