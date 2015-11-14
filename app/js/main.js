@@ -39,7 +39,7 @@ var config = function config($stateProvider, $urlRouterProvider) {
     controller: 'EditBillController',
     templateUrl: 'templates/editBill.tpl.html'
   }).state('root.roommates', {
-    url: '/roommates/:id',
+    url: '/roommates/',
     controller: 'RoomController',
     templateUrl: 'templates/room.tpl.html'
   }).state('root.roomBills', {
@@ -96,17 +96,25 @@ exports['default'] = AddBillController;
 module.exports = exports['default'];
 
 },{}],3:[function(require,module,exports){
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, '__esModule', {
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var AddRoomController = function AddRoomController($scope) {};
+var AddRoomController = function AddRoomController($scope) {
+
+  $scope.addRoommate = function (obj) {
+    RoomService.addRoommate(obj).then(function (res) {
+      $scope.roommate = {};
+      alert("You Added a Roommate");
+    }); //RoomService
+  };
+};
 
 AddRoomController.$inject = ['$scope'];
 
-exports['default'] = AddRoomController;
-module.exports = exports['default'];
+exports["default"] = AddRoomController;
+module.exports = exports["default"];
 
 },{}],4:[function(require,module,exports){
 'use strict';
