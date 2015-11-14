@@ -1,12 +1,14 @@
-let HomeController = function($scope, $cookies, UserService, $state, $rootScope){
+let HomeController = function($scope, $cookies, UserService, $state){
  
 
   $scope.create = function(user){
+
     
     UserService.create(user).then((res)=>{
       console.log(res);
     $state.go('/dashboard/res.data.user.email');
     });
+
   }
 
   $scope.login = function(user) {
@@ -20,7 +22,9 @@ let HomeController = function($scope, $cookies, UserService, $state, $rootScope)
   };
 };
 
+
 HomeController.$inject = ['$scope', '$cookies', 'UserService', '$state', '$rootScope'];
+
 
 export default HomeController;
   

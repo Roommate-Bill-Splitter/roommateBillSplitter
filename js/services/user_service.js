@@ -19,6 +19,7 @@ let UserService = function($http, SERVER, $cookies, $state) {
     this.address = obj.address;
   };
 
+
   this.create = function(obj){
     
     let u = new user(obj);

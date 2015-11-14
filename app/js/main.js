@@ -242,7 +242,7 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var HomeController = function HomeController($scope, $cookies, UserService, $state, $rootScope) {
+var HomeController = function HomeController($scope, $cookies, UserService, $state) {
 
   $scope.create = function (user) {
 
