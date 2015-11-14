@@ -450,7 +450,7 @@ var _servicesUser_service = require('./services/user_service');
 var _servicesUser_service2 = _interopRequireDefault(_servicesUser_service);
 
 _angular2['default'].module('app', ['ui.router', 'ngCookies', 'hSweetAlert']).constant('SERVER', {
-  URL: 'taco',
+  URL: 'https://mighty-lowlands-7785.herokuapp.com/',
   CONFIG: {
     empty: 'fornow'
   }
