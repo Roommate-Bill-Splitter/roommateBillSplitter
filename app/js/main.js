@@ -157,12 +157,27 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var HomeController = function HomeController($scope) {
+var HomeController = function HomeController($scope, $cookies, UserService, $state, $rootScope) {
 
-  $scope.title = 'whhhhhaaaaat';
+  $rootScope.bgimg = "Utility_Bills.gif";
+
+  $scope.create = function (user) {
+    UserService.create($scope.user);
+    $state.go('/dashboard/:id');
+  };
+
+  $scope.login = function (user) {
+    UserService.sendLogin(user).then(function (res) {
+      UserService.loginSuccess(res);
+    });
+  };
+
+  $scope.logmeout = function () {
+    UserService.logout();
+  };
 };
 
-HomeController.$inject = ['$scope'];
+HomeController.$inject = ['$scope', 'UserService', '$cookies', '$state', '$rootScope'];
 
 exports['default'] = HomeController;
 module.exports = exports['default'];
@@ -281,14 +296,72 @@ var _controllersEdit_room_controller = require('./controllers/edit_room_controll
 
 var _controllersEdit_room_controller2 = _interopRequireDefault(_controllersEdit_room_controller);
 
+//services
+
+var _servicesUser_service = require('./services/user_service');
+
+var _servicesUser_service2 = _interopRequireDefault(_servicesUser_service);
+
 _angular2['default'].module('app', ['ui.router', 'ngCookies']).constant('SERVER', {
   URL: 'taco',
   CONFIG: {
     empty: 'fornow'
   }
-}).config(_config2['default']).controller('HomeController', _controllersHome_controller2['default']).controller('DashController', _controllersDash_controller2['default']).controller('ChartController', _controllersChart_controller2['default']).controller('BillsController', _controllersBills_controller2['default']).controller('IndBillController', _controllersInd_bill_controller2['default']).controller('AddBillController', _controllersAdd_bill_controller2['default']).controller('EditBillController', _controllersEdit_bill_controller2['default']).controller('RoomController', _controllersRoom_controller2['default']).controller('RoomBillController', _controllersRoom_bill_controller2['default']).controller('AddRoomController', _controllersAdd_room_controller2['default']).controller('EditRoomController', _controllersEdit_room_controller2['default']);
+}).config(_config2['default']).controller('HomeController', _controllersHome_controller2['default']).controller('DashController', _controllersDash_controller2['default']).controller('ChartController', _controllersChart_controller2['default']).controller('BillsController', _controllersBills_controller2['default']).controller('IndBillController', _controllersInd_bill_controller2['default']).controller('AddBillController', _controllersAdd_bill_controller2['default']).controller('EditBillController', _controllersEdit_bill_controller2['default']).controller('RoomController', _controllersRoom_controller2['default']).controller('RoomBillController', _controllersRoom_bill_controller2['default']).controller('AddRoomController', _controllersAdd_room_controller2['default']).controller('EditRoomController', _controllersEdit_room_controller2['default']).service('UserService', _servicesUser_service2['default']);
 
-},{"./config":1,"./controllers/add_bill_controller":2,"./controllers/add_room_controller":3,"./controllers/bills_controller":4,"./controllers/chart_controller":5,"./controllers/dash_controller":6,"./controllers/edit_bill_controller":7,"./controllers/edit_room_controller":8,"./controllers/home_controller":9,"./controllers/ind_bill_controller":10,"./controllers/room_bill_controller":11,"./controllers/room_controller":12,"angular":18,"angular-cookies":15,"angular-ui-router":16,"jquery":19,"moment":20,"underscore":21}],14:[function(require,module,exports){
+},{"./config":1,"./controllers/add_bill_controller":2,"./controllers/add_room_controller":3,"./controllers/bills_controller":4,"./controllers/chart_controller":5,"./controllers/dash_controller":6,"./controllers/edit_bill_controller":7,"./controllers/edit_room_controller":8,"./controllers/home_controller":9,"./controllers/ind_bill_controller":10,"./controllers/room_bill_controller":11,"./controllers/room_controller":12,"./services/user_service":14,"angular":19,"angular-cookies":16,"angular-ui-router":17,"jquery":20,"moment":21,"underscore":22}],14:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+var UserService = function UserService($http, SERVER, $cookies, $state) {
+
+  this.checkAuth = function () {
+
+    var token = $cookies.get('authToken');
+
+    if (token) {
+      return $http.get(SERVER.URL + 'check', SERVER.CONFIG);
+    } else {
+      $state.go('root.home');
+    }
+  };
+
+  var User = function User(obj) {
+    this.name = obj.name;
+    this.email = obj.email;
+    this.password = obj.password;
+  };
+
+  this.create = function (obj) {
+    var u = new User(obj);
+    return $http.post(SERVER.URL, u, SERVER.CONFIG);
+  };
+
+  this.sendLogin = function (userObj) {
+    return $http.post(SERVER.URL + 'login', userObj, SERVER.CONFIG);
+  };
+
+  this.loginSuccess = function (res) {
+    $cookies.put('authToken', res.data.auth_token);
+    SERVER.CONFIG.headers['XX-AUTH-TOKEN'] = res.data.auth_token;
+    $state.go('root.dash');
+  };
+
+  this.logout = function () {
+    $cookies.remove('authToken');
+    SERVER.CONFIG.headers['XX-AUTH-TOKEN'] = null;
+    $state.go('root.login');
+  };
+};
+
+UserService.$inject = ['$http', 'SERVER', '$cookies', '$state'];
+
+exports['default'] = UserService;
+module.exports = exports['default'];
+
+},{}],15:[function(require,module,exports){
 /**
  * @license AngularJS v1.4.7
  * (c) 2010-2015 Google, Inc. http://angularjs.org
@@ -611,11 +684,11 @@ angular.module('ngCookies').provider('$$cookieWriter', function $$CookieWriterPr
 
 })(window, window.angular);
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 require('./angular-cookies');
 module.exports = 'ngCookies';
 
-},{"./angular-cookies":14}],16:[function(require,module,exports){
+},{"./angular-cookies":15}],17:[function(require,module,exports){
 /**
  * State-based routing for AngularJS
  * @version v0.2.15
@@ -4986,7 +5059,7 @@ angular.module('ui.router.state')
   .filter('isState', $IsStateFilter)
   .filter('includedByState', $IncludedByStateFilter);
 })(window, window.angular);
-},{}],17:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 /**
  * @license AngularJS v1.4.7
  * (c) 2010-2015 Google, Inc. http://angularjs.org
@@ -33891,11 +33964,11 @@ $provide.value("$locale", {
 })(window, document);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":17}],19:[function(require,module,exports){
+},{"./angular":18}],20:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
@@ -43107,7 +43180,7 @@ return jQuery;
 
 }));
 
-},{}],20:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 //! moment.js
 //! version : 2.10.6
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -46303,7 +46376,7 @@ return jQuery;
     return _moment;
 
 }));
-},{}],21:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors

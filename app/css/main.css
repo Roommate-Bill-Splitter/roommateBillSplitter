@@ -6390,4 +6390,33 @@ th.hide-for-touch {
 body {
   background: #e2ebf3; }
 
+.home {
+  background-image: url("../images/surrender.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: right 100px top 0;
+  height: 800px;
+  width: 100%;
+  margin: 0 auto; }
+
+.group {
+  width: 90%; }
+  .group .signup {
+    width: 30%;
+    float: right;
+    margin: 5% 5%; }
+  .group .log {
+    width: 30%;
+    float: left;
+    margin: 5% 5%; }
+
+.signup {
+  float: right; }
+
+.log {
+  float: left; }
+
+.can {
+  width: 300px; }
+
 /*# sourceMappingURL=main.css.map */

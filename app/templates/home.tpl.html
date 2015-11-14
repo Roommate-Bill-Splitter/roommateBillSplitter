@@ -1,1 +1,20 @@
-<h2>h2 laaaa{{title}}</h2>
+
+<div class="home">
+  <div class="group">
+    <div class="log">
+      <form ng-submit="login(user)">
+        <input placeholder="Username" ng-model="user.user">
+        <input placeholder="Password" ng-model="user.pass" type="password">
+        <button>Login</button>
+      </form>
+    </div>
+    <div class="signup">
+      <form ng-submit="create(user)">
+        <input placeholder="Email" ng-model="user.email">
+        <input placeholder="Username" ng-model="user.user">
+        <input placeholder="Password" ng-model="user.pass" type="password">
+        <button>Submit</button>
+      </form>
+    </div>
+  </div>
+</div>

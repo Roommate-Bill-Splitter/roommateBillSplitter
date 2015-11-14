@@ -17,6 +17,8 @@ import RoomController from './controllers/room_controller';
 import RoomBillController from './controllers/room_bill_controller';
 import AddRoomController from './controllers/add_room_controller';
 import EditRoomController from './controllers/edit_room_controller';
+//services
+import UserService from './services/user_service';
 
 
 
@@ -46,4 +48,5 @@ angular
   .controller('RoomBillController', RoomBillController)
   .controller('AddRoomController', AddRoomController)
   .controller('EditRoomController', EditRoomController)
+  .service('UserService', UserService)
 ;
