@@ -150,12 +150,16 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var ChartController = function ChartController($scope) {
+var ChartController = function ChartController($scope, ChartService) {
 
-  $scope.title = 'chart controller';
+  $scope.title = 'Bill Chart';
+
+  ChartService.getRoommates().then(function (res) {
+    $scope.roommates = res.data.results;
+  });
 };
 
-ChartController.$inject = ['$scope'];
+ChartController.$inject = ['$scope', 'ChartService'];
 
 exports['default'] = ChartController;
 module.exports = exports['default'];
