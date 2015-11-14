@@ -23,6 +23,7 @@ import EditRoomController from './controllers/edit_room_controller';
 //Services
 import RoomService from './services/room_service';
 import ChartService from './services/chart_service';
+import UserService from './services/user_service';
 
 
 
@@ -34,9 +35,9 @@ import ChartService from './services/chart_service';
 angular
   .module('app', ['ui.router', 'ngCookies', 'hSweetAlert'])
   .constant('SERVER', {
-    URL: 'taco',
+    URL: 'https://mighty-lowlands-7785.herokuapp.com/',
     CONFIG:{
-      empty: 'fornow'
+      headers: {}
     }
   })
   .config(config)
@@ -52,6 +53,8 @@ angular
   .controller('AddRoomController', AddRoomController)
   .controller('EditRoomController', EditRoomController)
 
+  .service('UserService', UserService)
   .service('RoomService', RoomService)
   .service('ChartService', ChartService)
+
 ;

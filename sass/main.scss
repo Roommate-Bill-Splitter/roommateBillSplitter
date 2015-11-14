@@ -3,21 +3,77 @@
 @import 'foundation';
 @import 'sweetalert';
 body {
-  background: #e2ebf3;
+  background: #969FA5;
+  
 } 
 //GLOBAL STYLES
 //---------------------------------------
 //Style for the div around all FORMS
+
+
 .formWrapper {
   width: 40%;
-  margin: 0 auto;
+  margin: 0 auto; 
   margin-top: 3%;
   text-align: center;
 }
+
 //Styles Buttons
 .siteButtons {
  
 }
+//---------------------------------------
+
+//Home Page
+.homeWrapper {
+  width: 100%;
+
+.home  {
+  background-image: url("../images/surrender.jpg");
+  border: 3px solid black;
+  border-radius: 2px;
+  box-shadow: 5px 5px 5px;
+  background-repeat: no-repeat;
+  background-position: 5% 5%;
+  background-size: 100%;
+  height: 600px;
+  width: 80%;
+  margin: 0 auto;
+}
+  .group{
+    width: 90%;
+    .signup{
+      width: 30%;
+      float: right;
+      margin:  5% 1%;
+  }
+  .homeTitle {
+    color: white;
+    text-shadow: 1px 1px black;
+  }
+
+    .log {
+      width: 30%;
+      float: left;
+      margin:  5% 7%;
+
+  }
+
+  }
+
+  .signup{
+
+    float:right;
+
+  }
+  .log{
+    float: left,
+
+  }
+
+}
+
+
 //---------------------------------------
 .billMain{
   width: 40%;
@@ -25,6 +81,7 @@ body {
   text-align: center;
 }
 
+//---------------------------------------
 
 .chart {
   width: 80%;
@@ -59,5 +116,6 @@ body {
 }
 
 //using addGoBack class from above for go back button
+
 
 
