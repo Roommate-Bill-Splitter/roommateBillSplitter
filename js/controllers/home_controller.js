@@ -6,15 +6,13 @@ let HomeController = function($scope, $cookies, UserService, $state){
     
     UserService.create(user).then((res)=>{
       console.log(res);
-    $state.go('/dashboard/res.data.user.email');
+    $state.go('root.dashboard');
     });
 
   }
 
   $scope.login = function(user) {
-    UserService.sendLogin(user).then((res) =>{
-      UserService.loginSuccess(res);
-    });
+    UserService.sendLogin(user)
   };
 
   $scope.logmeout = function() {

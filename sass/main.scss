@@ -29,6 +29,7 @@ body {
   width: 100%;
 
 .home  {
+  background: #545454;
   background-image: url("../images/surrender.jpg");
   border: 3px solid black;
   border-radius: 2px;
@@ -81,7 +82,15 @@ body {
   text-align: center;
 }
 
+.bills{
+  width: 40%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+
 //---------------------------------------
+
 
 .chart {
   width: 80%;

@@ -1,9 +1,22 @@
-let EditBillController = function($scope, sweet, $state){
+import $ from 'jquery';
+let EditBillController = function($scope, sweet, $state, $http, SERVER){
 
+    function Bill (obj){
+      this.name = obj.name;
+      this.amount=obj.amount;
+      this.due= obj.due;
+  }
+  $scope.editedBill={};
   $scope.editBill= function(results){
     //put request
-
-    sweet.show({
+    let x = new Bill(results);
+    $scope.editedBill = {
+      name: x.name,
+      amount: x.amount,
+      due: x.due
+    };
+    
+      sweet.show({
           title:'Bill Edited!',
           text: 'You are on top of this.',
           confirmButtonText: "Aight",
@@ -11,9 +24,15 @@ let EditBillController = function($scope, sweet, $state){
       }, function(){
         $state.go('root.bills')
       });
+    
+    
+      $('#addForm').validate();
+    
   }
+  
+
 };
 
-EditBillController.$inject = ['$scope', 'sweet', '$state'];
+EditBillController.$inject = ['$scope', 'sweet', '$state', '$http', 'SERVER'];
 
 export default EditBillController;
