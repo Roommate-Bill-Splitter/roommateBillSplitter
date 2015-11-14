@@ -13,7 +13,7 @@ let config= function($stateProvider, $urlRouterProvider, $httpProvider){
       templateUrl: 'templates/home.tpl.html'
     })
     .state('root.dashboard',{
-      url: '/dashboard/:id',
+      url: '/dashboard/:email',
       controller: 'DashController',
       templateUrl: 'templates/dash.tpl.html'
     })

@@ -16,7 +16,7 @@ var config = function config($stateProvider, $urlRouterProvider, $httpProvider) 
     controller: 'HomeController',
     templateUrl: 'templates/home.tpl.html'
   }).state('root.dashboard', {
-    url: '/dashboard/:id',
+    url: '/dashboard/:email',
     controller: 'DashController',
     templateUrl: 'templates/dash.tpl.html'
   }).state('root.charts', {
@@ -185,12 +185,11 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var DashController = function DashController($scope) {
-
-  $scope.title = 'dash controller';
+var DashController = function DashController($scope, $stateParams, UserService) {
+  var promise = UserService.checkAuth();
 };
 
-DashController.$inject = ['$scope'];
+DashController.$inject = ['$scope', '$stateParams', 'UserService'];
 
 exports['default'] = DashController;
 module.exports = exports['default'];
@@ -277,7 +276,7 @@ var HomeController = function HomeController($scope, $cookies, UserService, $sta
 
     UserService.create(user).then(function (res) {
       console.log(res);
-      $state.go('/dashboard/res.data.user.email');
+      $state.go('root.dashboard');
     });
   };
 
@@ -570,17 +569,21 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _jquery = require('jquery');
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
 var UserService = function UserService($http, SERVER, $cookies, $state) {
 
   this.checkAuth = function () {
 
     var token = $cookies.get('authToken');
-
     if (token) {
-      return $http.get(SERVER.URL + 'check', SERVER.CONFIG);
-    } else {
-      $state.go('root.home');
-    }
+      console.log('welcome');
+    };
   };
 
   var user = function user(obj) {
@@ -600,7 +603,6 @@ var UserService = function UserService($http, SERVER, $cookies, $state) {
 
   this.sendLogin = function (userObj) {
     $http.post(SERVER.URL + 'login', userObj, SERVER.CONFIG).then(function (res) {
-      console.log(res);
       $cookies.put('authToken', res.data.user.auth_token);
       SERVER.CONFIG.headers['X-AUTH-TOKEN'] = res.data.user.auth_token;
       $state.go('root.dashboard');
@@ -619,7 +621,7 @@ UserService.$inject = ['$http', 'SERVER', '$cookies', '$state'];
 exports['default'] = UserService;
 module.exports = exports['default'];
 
-},{}],18:[function(require,module,exports){
+},{"jquery":24}],18:[function(require,module,exports){
 /**
  * @license AngularJS v1.4.7
  * (c) 2010-2015 Google, Inc. http://angularjs.org

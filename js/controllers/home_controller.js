@@ -6,7 +6,7 @@ let HomeController = function($scope, $cookies, UserService, $state){
     
     UserService.create(user).then((res)=>{
       console.log(res);
-    $state.go('/dashboard/res.data.user.email');
+    $state.go('root.dashboard');
     });
 
   }

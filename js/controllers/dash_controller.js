@@ -1,8 +1,9 @@
-let DashController = function($scope){
-
-$scope.title = 'dash controller';
+let DashController = function($scope, $stateParams, UserService){
+  let promise = UserService.checkAuth();
+    
+  
 };
 
-DashController.$inject = ['$scope'];
+DashController.$inject = ['$scope', '$stateParams', 'UserService'];
 
 export default DashController;
