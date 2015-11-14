@@ -12,7 +12,7 @@ let config= function($stateProvider, $urlRouterProvider){
       templateUrl: 'templates/home.tpl.html'
     })
     .state('root.dashboard',{
-      url: '/dashboard/',
+      url: '/dashboard/:id',
       controller: 'DashController',
       templateUrl: 'templates/dash.tpl.html'
     })
@@ -42,22 +42,22 @@ let config= function($stateProvider, $urlRouterProvider){
       templateUrl: 'templates/editBill.tpl.html'
     })
     .state('root.roommates',{
-      url: '/roommates/',
+      url: '/roommates/:id',
       controller: 'RoomController',
       templateUrl: 'templates/room.tpl.html'
     })
     .state('root.roomBills',{
-      url: '/roommates/bills',
+      url: '/roommates/:id/:name/bills',
       controller: 'RoomBillController',
       templateUrl: 'templates/roomBill.tpl.html'
     })
     .state('root.addRoommate', {
-      url: '/roommates/add',
+      url: '/roommates/:id/add',
       controller: 'AddRoomController',
       templateUrl: 'templates/addRoom.tpl.html'
     })
     .state('root.editRoommates',{
-      url: '/roommates/edit',
+      url: '/roommates/:name/edit',
       controller: 'EditRoomController',
       templateUrl: 'templates/editRoom.tpl.html'
     });

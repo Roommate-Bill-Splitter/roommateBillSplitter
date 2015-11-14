@@ -1,10 +1,12 @@
 let HomeController = function($scope, $cookies, UserService, $state, $rootScope){
  
-  $rootScope.bgimg = "Utility_Bills.gif";
 
   $scope.create = function(user){
-    UserService.create($scope.user);
-    $state.go('/dashboard/:id');
+    
+    UserService.create(user).then((res)=>{
+      console.log(res);
+    $state.go('/dashboard/res.data.user.email');
+    });
   }
 
   $scope.login = function(user) {
@@ -18,7 +20,7 @@ let HomeController = function($scope, $cookies, UserService, $state, $rootScope)
   };
 };
 
-HomeController.$inject = ['$scope', 'UserService', '$cookies', '$state', '$rootScope'];
+HomeController.$inject = ['$scope', '$cookies', 'UserService', '$state', '$rootScope'];
 
 export default HomeController;
   
