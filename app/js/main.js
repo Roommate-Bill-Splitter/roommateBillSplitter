@@ -184,8 +184,20 @@ Object.defineProperty(exports, '__esModule', {
 });
 var EditBillController = function EditBillController($scope, sweet, $state) {
 
+  function Bill(obj) {
+    this.name = obj.name;
+    this.amount = obj.amount;
+    this.due = obj.due;
+  }
+  $scope.editedBill = {};
   $scope.editBill = function (results) {
     //put request
+    var x = new Bill(results);
+    $scope.editedBill = {
+      name: x.name,
+      amount: x.amount,
+      due: x.due
+    };
 
     sweet.show({
       title: 'Bill Edited!',
@@ -245,28 +257,26 @@ module.exports = exports['default'];
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
-  value: true
+    value: true
 });
 var IndBillController = function IndBillController($scope, $stateParams, sweet, $state) {
-  //get request for individual bill using $stateParams.id
-  $scope.results = //whatever
+    //get request for individual bill using $stateParams.id
+    $scope.results = //whatever
+    $scope.editBill = function () {
+        return $state.go('root.editBill');
+    };
+    $scope.deleteBill = function () {
+        sweet.show({
+            title: 'Delete this bill?',
+            text: 'Whatever you say, man.',
+            confirmButtonText: "Get rid of this thing",
+            showCancelButton: true
 
-  $scope.deleteBill = function () {
-    sweet.show({
-      title: 'Delete this bill?',
-      text: 'Whatever you say, man.',
-      confirmButtonText: "Get rid of this thing",
-      showCancelButton: true
-
-    }, function () {
-      //delete request
-      $state.go('root.bills');
-    });
-  };
-
-  $scope.editBill = function () {
-    $state.go('root.editBill');
-  };
+        }, function () {
+            //delete request
+            $state.go('root.bills');
+        });
+    };
 };
 
 IndBillController.$inject = ['$scope', '$stateParams', 'sweet', '$state'];
