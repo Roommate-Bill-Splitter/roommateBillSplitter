@@ -3,5 +3,7 @@
   <h4>Amount: {{results.amount}}</h4>
   <h4>Due: {{results.due}}</h4>
   <button ng-click="deleteBill()">Delete</button>
-  <button ng-click="editBill()">Edit Bill</button>
+  <form ng-submit="editBill()">
+  <button>Edit Bill</button>
+  </form>
 </div>

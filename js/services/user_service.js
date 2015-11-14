@@ -28,16 +28,15 @@ let UserService = function($http, SERVER, $cookies, $state) {
   }
 
   this.sendLogin = function(userObj){
-    return $http.post(SERVER.URL + 'login', userObj, SERVER.CONFIG);
+    $http.post(SERVER.URL + 'login', userObj, SERVER.CONFIG).then((res)=>{
+      console.log(res);
+      $cookies.put('authToken', res.data.user.auth_token);
+      SERVER.CONFIG.headers['X-AUTH-TOKEN'] = res.data.user.auth_token;
+      $state.go('root.dashboard')
+    });
     
   };
 
-  this.loginSuccess= function (res) {
-    console.log(res);
-    $cookies.put('authToken', res.data.user.auth_token);
-    SERVER.CONFIG.headers['X-AUTH-TOKEN'] = res.data.user.auth_token;
-    $state.go('root.dashboard')
-  };
 
   this.logout = function (){
     $cookies.remove('authToken');

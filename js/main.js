@@ -24,7 +24,7 @@ import EditRoomController from './controllers/edit_room_controller';
 import RoomService from './services/room_service';
 import ChartService from './services/chart_service';
 import UserService from './services/user_service';
-
+import BillService from './services/bill_service';
 
 
 
@@ -56,5 +56,5 @@ angular
   .service('UserService', UserService)
   .service('RoomService', RoomService)
   .service('ChartService', ChartService)
-
+  .service('BillService', BillService)
 ;

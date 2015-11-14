@@ -1,6 +1,7 @@
-let config= function($stateProvider, $urlRouterProvider){
+let config= function($stateProvider, $urlRouterProvider, $httpProvider){
   $urlRouterProvider.otherwise('/');
-
+  // $httpProvider.defaults.useXDomain = true;
+  // delete $httpProvider.defaults.headers.common['X-Requested-With'];
   $stateProvider
     .state('root', {
       abstract: true,
@@ -62,5 +63,5 @@ let config= function($stateProvider, $urlRouterProvider){
       templateUrl: 'templates/editRoom.tpl.html'
     });
 };
-config.$inject = ['$stateProvider', '$urlRouterProvider'];
+config.$inject = ['$stateProvider', '$urlRouterProvider', '$httpProvider'];
 export default config;
