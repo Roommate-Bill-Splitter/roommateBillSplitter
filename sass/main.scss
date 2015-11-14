@@ -5,18 +5,22 @@
 body {
   background: #e2ebf3;
 } 
+//GLOBAL STYLES
+//---------------------------------------
+//Style for the div around all FORMS
+.formWrapper {
+  width: 40%;
+  margin: 0 auto;
+  text-align: center;
+}
+//Styles Buttons
+.siteButtons {
+
+}
+//---------------------------------------
 .billMain{
   width: 40%;
   margin: 0 auto;
   text-align: center;
 }
-.addBill{
-  width: 40%;
-  margin: 0 auto;
-  text-align: center;
-}
-.editBill{
-  width: 40%;
-  margin: 0 auto;
-  text-align: center;
-}
+
