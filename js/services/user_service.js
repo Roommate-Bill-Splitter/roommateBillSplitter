@@ -17,7 +17,7 @@ let UserService = function($http, SERVER, $cookies, $state) {
     this.password = obj.password;
   };
 
-  this.createUser = function(obj){
+  this.create = function(obj){
     let u = new User(obj);
     return $http.post(SERVER.URL, u, SERVER.CONFIG);
   }
@@ -28,7 +28,7 @@ let UserService = function($http, SERVER, $cookies, $state) {
 
   this.loginSuccess= function (res) {
     $cookies.put('authToken', res.data.auth_token);
-    SERVER.CONFIG.headers['XX-AUTH-TOKEN'] = res.data.auth_token;
+    SERVER.CONFIG.headers['X-AUTH-TOKEN'] = res.data.auth_token;
     $state.go('root.dash')
   };
 

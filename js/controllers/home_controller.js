@@ -1,4 +1,4 @@
-let HomeController = function($scope, $cookies, UserService, $state){
+let HomeController = function($scope, UserService, $cookies, $state){
  
 
   $scope.create = function(user){
@@ -6,6 +6,19 @@ let HomeController = function($scope, $cookies, UserService, $state){
       $scope.create= {};
     });
     $state.go('/dashboard/:id');
+  }
+
+  let promise = UserService.checkAuth();
+
+  if (promise) {
+    promise.then( (res) => {
+      console.log(res);
+      if (res.data.status === 'Authentication failed.') {
+        $state.go('root.login');
+      } else {
+        $scope.message = 'I am logged in';
+      }
+    });
   }
 
   $scope.login = function(user) {

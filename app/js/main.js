@@ -242,7 +242,7 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var HomeController = function HomeController($scope, $cookies, UserService, $state) {
+var HomeController = function HomeController($scope, UserService, $cookies, $state) {
 
   $scope.create = function (user) {
     UserService.create(user).then(function (res) {
@@ -250,6 +250,19 @@ var HomeController = function HomeController($scope, $cookies, UserService, $sta
     });
     $state.go('/dashboard/:id');
   };
+
+  var promise = UserService.checkAuth();
+
+  if (promise) {
+    promise.then(function (res) {
+      console.log(res);
+      if (res.data.status === 'Authentication failed.') {
+        $state.go('root.login');
+      } else {
+        $scope.message = 'I am logged in';
+      }
+    });
+  }
 
   $scope.login = function (user) {
     UserService.sendLogin(user).then(function (res) {
@@ -546,7 +559,7 @@ var UserService = function UserService($http, SERVER, $cookies, $state) {
     this.password = obj.password;
   };
 
-  this.createUser = function (obj) {
+  this.create = function (obj) {
     var u = new User(obj);
     return $http.post(SERVER.URL, u, SERVER.CONFIG);
   };
@@ -557,7 +570,7 @@ var UserService = function UserService($http, SERVER, $cookies, $state) {
 
   this.loginSuccess = function (res) {
     $cookies.put('authToken', res.data.auth_token);
-    SERVER.CONFIG.headers['XX-AUTH-TOKEN'] = res.data.auth_token;
+    SERVER.CONFIG.headers['X-AUTH-TOKEN'] = res.data.auth_token;
     $state.go('root.dash');
   };
 
