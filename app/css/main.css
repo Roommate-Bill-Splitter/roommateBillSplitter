@@ -7383,17 +7383,12 @@ body.stop-scrolling {
 body {
   background: #e2ebf3; }
 
+.formWrapper {
+  width: 40%;
+  margin: 0 auto;
+  text-align: center; }
+
 .billMain {
-  width: 40%;
-  margin: 0 auto;
-  text-align: center; }
-
-.addBill {
-  width: 40%;
-  margin: 0 auto;
-  text-align: center; }
-
-.editBill {
   width: 40%;
   margin: 0 auto;
   text-align: center; }
