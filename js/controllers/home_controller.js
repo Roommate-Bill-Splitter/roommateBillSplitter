@@ -12,9 +12,7 @@ let HomeController = function($scope, $cookies, UserService, $state){
   }
 
   $scope.login = function(user) {
-    UserService.sendLogin(user).then((res) =>{
-      UserService.loginSuccess(res);
-    });
+    UserService.sendLogin(user)
   };
 
   $scope.logmeout = function() {
