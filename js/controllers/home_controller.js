@@ -2,10 +2,13 @@ let HomeController = function($scope, UserService, $cookies, $state){
  
 
   $scope.create = function(user){
-    UserService.create(user).then((res) =>{
-      $scope.create= {};
+
+    
+    UserService.create(user).then((res)=>{
+      console.log(res);
+    $state.go('/dashboard/res.data.user.email');
     });
-    $state.go('/dashboard/:id');
+
   }
 
   let promise = UserService.checkAuth();
@@ -32,7 +35,9 @@ let HomeController = function($scope, UserService, $cookies, $state){
   };
 };
 
+
 HomeController.$inject = ['$scope', 'UserService', '$cookies', '$state'];
+
 
 export default HomeController;
   

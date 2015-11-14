@@ -5,17 +5,17 @@
         <h4 class="homeTitle">Sign In</h4>
         <form ng-submit="login(user)">
           <input placeholder="Email" ng-model="user.email">
-          <input placeholder="Password" ng-model="user.pass" type="password">
+          <input placeholder="Password" ng-model="user.password" type="password">
           <button>Login</button>
         </form>
       </div>
       <div class="signup">
         <form ng-submit="create(user2)">
           <h4 class="homeTitle">Register</h4>
-          <input placeholder="Email" ng-model="user2.email">
           <input placeholder="First Name" ng-model="user2.first_name">
           <input placeholder="Last Name" ng-model="user2.last_name">
-          <input placeholder="Password" ng-model="user2.pass" type="password">
+          <input placeholder="Email" ng-model="user2.email">
+          <input placeholder="Password" ng-model="user2.password" type="password">
           <input placeholder="Address" ng-model="user2.address" type="text">
           <button>Submit</button>
         </form>
