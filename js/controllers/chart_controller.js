@@ -6,6 +6,8 @@ let ChartController = function($scope, ChartService) {
     $scope.roommates = res.data.results;    
   });
 
+  
+
 };
 
 ChartController.$inject = ['$scope', 'ChartService'];
