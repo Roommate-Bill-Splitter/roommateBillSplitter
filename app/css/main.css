@@ -7409,4 +7409,9 @@ body {
   margin: 5%;
   background-color: pink; }
 
+.chart {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center; }
+
 /*# sourceMappingURL=main.css.map */

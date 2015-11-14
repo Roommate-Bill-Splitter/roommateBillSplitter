@@ -160,10 +160,10 @@ Object.defineProperty(exports, '__esModule', {
 var ChartController = function ChartController($scope, ChartService) {
 
   $scope.title = 'Bill Chart';
-
-  ChartService.getRoommates().then(function (res) {
-    $scope.roommates = res.data.results;
-  });
+  // //
+  //   ChartService.getRoommates().then ( (res) => {
+  //     $scope.roommates = res.data.results;   
+  //   });
 };
 
 ChartController.$inject = ['$scope', 'ChartService'];
@@ -426,14 +426,44 @@ var _servicesRoom_service = require('./services/room_service');
 
 var _servicesRoom_service2 = _interopRequireDefault(_servicesRoom_service);
 
+var _servicesChart_service = require('./services/chart_service');
+
+var _servicesChart_service2 = _interopRequireDefault(_servicesChart_service);
+
 _angular2['default'].module('app', ['ui.router', 'ngCookies', 'hSweetAlert']).constant('SERVER', {
   URL: 'taco',
   CONFIG: {
     empty: 'fornow'
   }
-}).config(_config2['default']).controller('HomeController', _controllersHome_controller2['default']).controller('DashController', _controllersDash_controller2['default']).controller('ChartController', _controllersChart_controller2['default']).controller('BillsController', _controllersBills_controller2['default']).controller('IndBillController', _controllersInd_bill_controller2['default']).controller('AddBillController', _controllersAdd_bill_controller2['default']).controller('EditBillController', _controllersEdit_bill_controller2['default']).controller('RoomController', _controllersRoom_controller2['default']).controller('RoomBillController', _controllersRoom_bill_controller2['default']).controller('AddRoomController', _controllersAdd_room_controller2['default']).controller('EditRoomController', _controllersEdit_room_controller2['default']).service('RoomService', _servicesRoom_service2['default']);
+}).config(_config2['default']).controller('HomeController', _controllersHome_controller2['default']).controller('DashController', _controllersDash_controller2['default']).controller('ChartController', _controllersChart_controller2['default']).controller('BillsController', _controllersBills_controller2['default']).controller('IndBillController', _controllersInd_bill_controller2['default']).controller('AddBillController', _controllersAdd_bill_controller2['default']).controller('EditBillController', _controllersEdit_bill_controller2['default']).controller('RoomController', _controllersRoom_controller2['default']).controller('RoomBillController', _controllersRoom_bill_controller2['default']).controller('AddRoomController', _controllersAdd_room_controller2['default']).controller('EditRoomController', _controllersEdit_room_controller2['default']).service('RoomService', _servicesRoom_service2['default']).service('ChartService', _servicesChart_service2['default']);
 
-},{"./config":1,"./controllers/add_bill_controller":2,"./controllers/add_room_controller":3,"./controllers/bills_controller":4,"./controllers/chart_controller":5,"./controllers/dash_controller":6,"./controllers/edit_bill_controller":7,"./controllers/edit_room_controller":8,"./controllers/home_controller":9,"./controllers/ind_bill_controller":10,"./controllers/room_bill_controller":11,"./controllers/room_controller":12,"./services/room_service":14,"angular":20,"angular-cookies":16,"angular-h-sweetalert":17,"angular-ui-router":18,"jquery":21,"moment":22,"sweetalert":31,"underscore":32}],14:[function(require,module,exports){
+},{"./config":1,"./controllers/add_bill_controller":2,"./controllers/add_room_controller":3,"./controllers/bills_controller":4,"./controllers/chart_controller":5,"./controllers/dash_controller":6,"./controllers/edit_bill_controller":7,"./controllers/edit_room_controller":8,"./controllers/home_controller":9,"./controllers/ind_bill_controller":10,"./controllers/room_bill_controller":11,"./controllers/room_controller":12,"./services/chart_service":14,"./services/room_service":15,"angular":21,"angular-cookies":17,"angular-h-sweetalert":18,"angular-ui-router":19,"jquery":22,"moment":23,"sweetalert":32,"underscore":33}],14:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+var ChartService = function ChartService($http, SERVER) {
+
+  // let url = SERVER.URL + 'classes/';
+
+  this.getRoommates = function () {
+    // return $http({
+    //   url: url,
+    //   headers: SERVER.CONFIG.header,
+    //   method: 'GET',
+    //   cache: true
+    // });
+
+  };
+};
+
+ChartService.$inject = ['$http', 'SERVER'];
+
+exports['default'] = ChartService;
+module.exports = exports['default'];
+
+},{}],15:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -472,7 +502,7 @@ RoomService.$inject = ['$http'];
 exports['default'] = RoomService;
 module.exports = exports['default'];
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 /**
  * @license AngularJS v1.4.7
  * (c) 2010-2015 Google, Inc. http://angularjs.org
@@ -795,11 +825,11 @@ angular.module('ngCookies').provider('$$cookieWriter', function $$CookieWriterPr
 
 })(window, window.angular);
 
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 require('./angular-cookies');
 module.exports = 'ngCookies';
 
-},{"./angular-cookies":15}],17:[function(require,module,exports){
+},{"./angular-cookies":16}],18:[function(require,module,exports){
 /**
  * angular-h-sweetalert is a simple wrapper of sweetalert.
  *
@@ -857,7 +887,7 @@ module.exports = 'ngCookies';
 
 }(angular, window));
 
-},{"sweetalert":31}],18:[function(require,module,exports){
+},{"sweetalert":32}],19:[function(require,module,exports){
 /**
  * State-based routing for AngularJS
  * @version v0.2.15
@@ -5228,7 +5258,7 @@ angular.module('ui.router.state')
   .filter('isState', $IsStateFilter)
   .filter('includedByState', $IncludedByStateFilter);
 })(window, window.angular);
-},{}],19:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 /**
  * @license AngularJS v1.4.7
  * (c) 2010-2015 Google, Inc. http://angularjs.org
@@ -34133,11 +34163,11 @@ $provide.value("$locale", {
 })(window, document);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],20:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":19}],21:[function(require,module,exports){
+},{"./angular":20}],22:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
@@ -43349,7 +43379,7 @@ return jQuery;
 
 }));
 
-},{}],22:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 //! moment.js
 //! version : 2.10.6
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -46545,7 +46575,7 @@ return jQuery;
     return _moment;
 
 }));
-},{}],23:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -46578,7 +46608,7 @@ var defaultParams = {
 
 exports['default'] = defaultParams;
 module.exports = exports['default'];
-},{}],24:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -46714,7 +46744,7 @@ exports['default'] = {
   handleCancel: handleCancel
 };
 module.exports = exports['default'];
-},{"./handle-dom":25,"./handle-swal-dom":27,"./utils":30}],25:[function(require,module,exports){
+},{"./handle-dom":26,"./handle-swal-dom":28,"./utils":31}],26:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -46906,7 +46936,7 @@ exports.fadeIn = fadeIn;
 exports.fadeOut = fadeOut;
 exports.fireClick = fireClick;
 exports.stopEventPropagation = stopEventPropagation;
-},{}],26:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -46986,7 +47016,7 @@ var handleKeyDown = function handleKeyDown(event, params, modal) {
 
 exports['default'] = handleKeyDown;
 module.exports = exports['default'];
-},{"./handle-dom":25,"./handle-swal-dom":27}],27:[function(require,module,exports){
+},{"./handle-dom":26,"./handle-swal-dom":28}],28:[function(require,module,exports){
 'use strict';
 
 var _interopRequireWildcard = function (obj) { return obj && obj.__esModule ? obj : { 'default': obj }; };
@@ -47154,7 +47184,7 @@ exports.openModal = openModal;
 exports.resetInput = resetInput;
 exports.resetInputError = resetInputError;
 exports.fixVerticalPosition = fixVerticalPosition;
-},{"./default-params":23,"./handle-dom":25,"./injected-html":28,"./utils":30}],28:[function(require,module,exports){
+},{"./default-params":24,"./handle-dom":26,"./injected-html":29,"./utils":31}],29:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -47197,7 +47227,7 @@ var injectedHTML =
 
 exports["default"] = injectedHTML;
 module.exports = exports["default"];
-},{}],29:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -47423,7 +47453,7 @@ var setParameters = function setParameters(params) {
 
 exports['default'] = setParameters;
 module.exports = exports['default'];
-},{"./handle-dom":25,"./handle-swal-dom":27,"./utils":30}],30:[function(require,module,exports){
+},{"./handle-dom":26,"./handle-swal-dom":28,"./utils":31}],31:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -47497,7 +47527,7 @@ exports.hexToRgb = hexToRgb;
 exports.isIE8 = isIE8;
 exports.logStr = logStr;
 exports.colorLuminance = colorLuminance;
-},{}],31:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 'use strict';
 
 var _interopRequireWildcard = function (obj) { return obj && obj.__esModule ? obj : { 'default': obj }; };
@@ -47801,7 +47831,7 @@ if (typeof window !== 'undefined') {
   _extend$hexToRgb$isIE8$logStr$colorLuminance.logStr('SweetAlert is a frontend module!');
 }
 module.exports = exports['default'];
-},{"./modules/default-params":23,"./modules/handle-click":24,"./modules/handle-dom":25,"./modules/handle-key":26,"./modules/handle-swal-dom":27,"./modules/set-params":29,"./modules/utils":30}],32:[function(require,module,exports){
+},{"./modules/default-params":24,"./modules/handle-click":25,"./modules/handle-dom":26,"./modules/handle-key":27,"./modules/handle-swal-dom":28,"./modules/set-params":30,"./modules/utils":31}],33:[function(require,module,exports){
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
