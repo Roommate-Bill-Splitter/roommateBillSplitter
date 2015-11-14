@@ -37,7 +37,7 @@ angular
   .constant('SERVER', {
     URL: 'https://mighty-lowlands-7785.herokuapp.com/',
     CONFIG:{
-      empty: 'fornow'
+      headers: {}
     }
   })
   .config(config)

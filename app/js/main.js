@@ -242,12 +242,12 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var HomeController = function HomeController($scope, $cookies, UserService, $state, $rootScope) {
-
-  $rootScope.bgimg = "Utility_Bills.gif";
+var HomeController = function HomeController($scope, $cookies, UserService, $state) {
 
   $scope.create = function (user) {
-    UserService.create($scope.user);
+    UserService.create(user).then(function (res) {
+      $scope.create = {};
+    });
     $state.go('/dashboard/:id');
   };
 
@@ -262,7 +262,7 @@ var HomeController = function HomeController($scope, $cookies, UserService, $sta
   };
 };
 
-HomeController.$inject = ['$scope', 'UserService', '$cookies', '$state', '$rootScope'];
+HomeController.$inject = ['$scope', 'UserService', '$cookies', '$state'];
 
 exports['default'] = HomeController;
 module.exports = exports['default'];
@@ -452,7 +452,7 @@ var _servicesUser_service2 = _interopRequireDefault(_servicesUser_service);
 _angular2['default'].module('app', ['ui.router', 'ngCookies', 'hSweetAlert']).constant('SERVER', {
   URL: 'https://mighty-lowlands-7785.herokuapp.com/',
   CONFIG: {
-    empty: 'fornow'
+    headers: {}
   }
 }).config(_config2['default']).controller('HomeController', _controllersHome_controller2['default']).controller('DashController', _controllersDash_controller2['default']).controller('ChartController', _controllersChart_controller2['default']).controller('BillsController', _controllersBills_controller2['default']).controller('IndBillController', _controllersInd_bill_controller2['default']).controller('AddBillController', _controllersAdd_bill_controller2['default']).controller('EditBillController', _controllersEdit_bill_controller2['default']).controller('RoomController', _controllersRoom_controller2['default']).controller('RoomBillController', _controllersRoom_bill_controller2['default']).controller('AddRoomController', _controllersAdd_room_controller2['default']).controller('EditRoomController', _controllersEdit_room_controller2['default']).service('UserService', _servicesUser_service2['default']).service('RoomService', _servicesRoom_service2['default']).service('ChartService', _servicesChart_service2['default']);
 
@@ -546,7 +546,7 @@ var UserService = function UserService($http, SERVER, $cookies, $state) {
     this.password = obj.password;
   };
 
-  this.create = function (obj) {
+  this.createUser = function (obj) {
     var u = new User(obj);
     return $http.post(SERVER.URL, u, SERVER.CONFIG);
   };
