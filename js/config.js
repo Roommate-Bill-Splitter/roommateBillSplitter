@@ -27,7 +27,7 @@ let config= function($stateProvider, $urlRouterProvider){
       templateUrl: 'templates/bills.tpl.html'
     })
     .state('root.indBill',{
-      url: '/bills/SMANG:id/:billName',   //CHANGE URL BACK *********************
+      url: '/bills/:id/:billName',   
       controller: 'IndBillController',
       templateUrl: 'templates/indBill.tpl.html'
     })
