@@ -7383,6 +7383,36 @@ body.stop-scrolling {
 body {
   background: #e2ebf3; }
 
+<<<<<<< HEAD
+.home {
+  background-image: url("../images/surrender.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: right 100px top 0;
+  height: 800px;
+  width: 100%;
+  margin: 0 auto; }
+
+.group {
+  width: 90%; }
+  .group .signup {
+    width: 30%;
+    float: right;
+    margin: 5% 5%; }
+  .group .log {
+    width: 30%;
+    float: left;
+    margin: 5% 5%; }
+
+.signup {
+  float: right; }
+
+.log {
+  float: left; }
+
+.can {
+  width: 300px; }
+=======
 .formWrapper {
   width: 40%;
   margin: 0 auto;
@@ -7413,5 +7443,11 @@ body {
   height: 200px;
   margin: 5%;
   background-color: pink; }
+
+.chart {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center; }
+>>>>>>> b57c433abedba0b1cf8df77e5a3fdcf451400c7a
 
 /*# sourceMappingURL=main.css.map */

@@ -3,10 +3,10 @@
 <div class="formWrapper">
   <h3>Add a Roommate</h3>
   <form class="addRoomForm" ng-submit="addRoommate(room)">
-    <input ng-model="room.name" placeholder="name" type="text">
-    <input ng-model="room.email" placeholder="email" type="text">
-    <input ng-model="room.phone" placeholder="phone number" type="text">
-    <input ng-model="room.house_id" placeholder="house #id" type="text">
+    <input ng-model="room.name" placeholder="name" type="text" required>
+    <input ng-model="room.email" placeholder="email" type="text" required>
+    <input ng-model="room.phone" placeholder="phone number" type="text" required>
+    <input ng-model="room.house_id" placeholder="house #id" type="text" required>
     <button>Add</button>
     <button ng-click="goBack()">Go Back</button>
   </form>
