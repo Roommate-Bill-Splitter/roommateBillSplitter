@@ -1,3 +1,4 @@
+import $ from 'jquery';
 let AddBillController = function($scope, $stateParams, sweet, $state){
 
   $scope.title = 'add bill';
@@ -25,7 +26,7 @@ let AddBillController = function($scope, $stateParams, sweet, $state){
         $state.go('root.bills')
         $scope.bill={};
       });
-
+    
     //post request with newBill
     
   }
