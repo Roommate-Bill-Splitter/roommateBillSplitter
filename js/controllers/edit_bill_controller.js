@@ -1,5 +1,6 @@
+import $ from 'jquery';
 let EditBillController = function($scope, sweet, $state){
-
+  
     function Bill (obj){
       this.name = obj.name;
       this.amount=obj.amount;
@@ -25,7 +26,7 @@ let EditBillController = function($scope, sweet, $state){
       });
     
     
-
+      $('#addForm').validate();
     
   }
 };

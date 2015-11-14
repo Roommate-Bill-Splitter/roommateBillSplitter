@@ -66,6 +66,13 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _jquery = require('jquery');
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
 var AddBillController = function AddBillController($scope, $stateParams, sweet, $state) {
 
   $scope.title = 'add bill';
@@ -103,7 +110,7 @@ AddBillController.$inject = ['$scope', '$stateParams', 'sweet', '$state'];
 exports['default'] = AddBillController;
 module.exports = exports['default'];
 
-},{}],3:[function(require,module,exports){
+},{"jquery":21}],3:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -193,6 +200,13 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _jquery = require('jquery');
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
 var EditBillController = function EditBillController($scope, sweet, $state) {
 
   function Bill(obj) {
@@ -218,6 +232,8 @@ var EditBillController = function EditBillController($scope, sweet, $state) {
     }, function () {
       $state.go('root.bills');
     });
+
+    (0, _jquery2['default'])('#addForm').validate();
   };
 };
 
@@ -226,7 +242,7 @@ EditBillController.$inject = ['$scope', 'sweet', '$state'];
 exports['default'] = EditBillController;
 module.exports = exports['default'];
 
-},{}],8:[function(require,module,exports){
+},{"jquery":21}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {

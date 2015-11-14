@@ -7394,6 +7394,11 @@ body {
   margin: 0 auto;
   text-align: center; }
 
+.bills {
+  width: 40%;
+  margin: 0 auto;
+  text-align: center; }
+
 .roomWrapper {
   width: 400px;
   height: 200px;
