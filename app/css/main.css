@@ -7392,6 +7392,7 @@ body {
 .homeWrapper {
   width: 100%; }
   .homeWrapper .home {
+    background: #545454;
     background-image: url("../images/surrender.jpg");
     border: 3px solid black;
     border-radius: 2px;
