@@ -1,10 +1,17 @@
-let AddRoomController = function($scope, RoomService, $state){
+let AddRoomController = function($scope, RoomService, $state, sweet){
 
 
   $scope.addRoommate = (obj) => {
     RoomService.addRoommate(obj).then( (res) => {
-      $scope.roommate = {};
-      alert("You Added a Roommate")
+   
+        sweet.show({
+          title:'Roommate Added!',
+          text: 'Congrats.',
+          confirmButtonText: "K cool"
+      }, function(){
+        $state.go('root.roommates')
+        $scope.roomate={};
+      });
     });//RoomService
   }
 
@@ -12,8 +19,10 @@ let AddRoomController = function($scope, RoomService, $state){
     $state.go('root.roommates');
   }
 
+
+
 };
 
-AddRoomController.$inject = ['$scope', 'RoomService', '$state'];
+AddRoomController.$inject = ['$scope', 'RoomService', '$state', 'sweet'];
 
 export default AddRoomController;

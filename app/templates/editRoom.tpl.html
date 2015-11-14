@@ -1,13 +1,12 @@
-<h3>Edit</h3>
-<div>
-  <form ng-submit="updateRoom()">
-    <input ng-model="w" type="text" placeholder="">
-    <input ng-model="w" type="text" placeholder="">
-    <input ng-model="w" type="text" placeholder="">
-    <input ng-model="w" type="text" placeholder="">
-    <input ng-model="w" type="text" placeholder="">
+
+<div class="formWrapper">
+  <h3>Edit</h3>
+  <form ng-submit="updateRoom(room)">
+    <input ng-model="room.name" type="text">
+    <input ng-model="room.email" type="text">
+    <input ng-model="room.phone" type="text">
+    <input ng-model="room.house_id" type="text">
     <button>Edit</button>
     <button ng-click="goBack()">Go Back</button>
-
-  <form>
-</form>
+  </form>
+</div>
