@@ -1,1 +1,10 @@
-<h2>{{title}}</h2>
+<div class="wat">
+<a href="#/bills/{{id}}/add">Add Bill</a>
+  <ul> 
+    <li ng-repeat="b in billList">
+      <a href="#/bills/{{id}}/{{b.name}}">{{b.name}}: {{b.amount}}
+      </a>
+    </li>
+  </ul>
+
+</div>

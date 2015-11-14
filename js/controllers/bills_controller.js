@@ -1,5 +1,6 @@
 let BillsController = function($scope){
-$scope.title = 'bill nye';
+
+  $scope.roomList=[];
 
 };
 
