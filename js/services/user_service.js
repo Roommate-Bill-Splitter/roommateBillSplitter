@@ -11,30 +11,36 @@ let UserService = function($http, SERVER, $cookies, $state) {
     }
   }
 
-  let User = function (obj) {
-    this.name = obj.name;
+  let user = function (obj) {
+    this.first_name = obj.first_name;
+    this.last_name = obj.last_name;
     this.email = obj.email;
     this.password = obj.password;
+    this.address = obj.address;
   };
 
+
   this.create = function(obj){
-    let u = new User(obj);
-    return $http.post(SERVER.URL, u, SERVER.CONFIG);
+    
+    let u = new user(obj);
+    
+    return $http.post(SERVER.URL +'signup', u)
   }
 
   this.sendLogin = function(userObj){
-    return $http.post(SERVER.URL + 'login', userObj, SERVER.CONFIG);
+    $http.post(SERVER.URL + 'login', userObj, SERVER.CONFIG).then((res)=>{
+      console.log(res);
+      $cookies.put('authToken', res.data.user.auth_token);
+      SERVER.CONFIG.headers['X-AUTH-TOKEN'] = res.data.user.auth_token;
+      $state.go('root.dashboard')
+    });
+    
   };
 
-  this.loginSuccess= function (res) {
-    $cookies.put('authToken', res.data.auth_token);
-    SERVER.CONFIG.headers['XX-AUTH-TOKEN'] = res.data.auth_token;
-    $state.go('root.dash')
-  };
 
   this.logout = function (){
     $cookies.remove('authToken');
-    SERVER.CONFIG.headers['XX-AUTH-TOKEN'] = null;
+    SERVER.CONFIG.headers['X-AUTH-TOKEN'] = null;
     $state.go('root.login');
   };
 };

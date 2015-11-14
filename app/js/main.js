@@ -16,7 +16,7 @@ var config = function config($stateProvider, $urlRouterProvider, $httpProvider) 
     controller: 'HomeController',
     templateUrl: 'templates/home.tpl.html'
   }).state('root.dashboard', {
-    url: '/dashboard/',
+    url: '/dashboard/:id',
     controller: 'DashController',
     templateUrl: 'templates/dash.tpl.html'
   }).state('root.charts', {
@@ -40,19 +40,19 @@ var config = function config($stateProvider, $urlRouterProvider, $httpProvider) 
     controller: 'EditBillController',
     templateUrl: 'templates/editBill.tpl.html'
   }).state('root.roommates', {
-    url: '/roommates/',
+    url: '/roommates/:id',
     controller: 'RoomController',
     templateUrl: 'templates/room.tpl.html'
   }).state('root.roomBills', {
-    url: '/roommates/bills',
+    url: '/roommates/:id/:name/bills',
     controller: 'RoomBillController',
     templateUrl: 'templates/roomBill.tpl.html'
   }).state('root.addRoommate', {
-    url: '/roommates/add',
+    url: '/roommates/:id/add',
     controller: 'AddRoomController',
     templateUrl: 'templates/addRoom.tpl.html'
   }).state('root.editRoommates', {
-    url: '/roommates/edit',
+    url: '/roommates/:name/edit',
     controller: 'EditRoomController',
     templateUrl: 'templates/editRoom.tpl.html'
   });
@@ -271,19 +271,18 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var HomeController = function HomeController($scope, $cookies, UserService, $state, $rootScope) {
-
-  $rootScope.bgimg = "Utility_Bills.gif";
+var HomeController = function HomeController($scope, $cookies, UserService, $state) {
 
   $scope.create = function (user) {
-    UserService.create($scope.user);
-    $state.go('/dashboard/:id');
+
+    UserService.create(user).then(function (res) {
+      console.log(res);
+      $state.go('/dashboard/res.data.user.email');
+    });
   };
 
   $scope.login = function (user) {
-    UserService.sendLogin(user).then(function (res) {
-      UserService.loginSuccess(res);
-    });
+    UserService.sendLogin(user);
   };
 
   $scope.logmeout = function () {
@@ -291,7 +290,7 @@ var HomeController = function HomeController($scope, $cookies, UserService, $sta
   };
 };
 
-HomeController.$inject = ['$scope', 'UserService', '$cookies', '$state', '$rootScope'];
+HomeController.$inject = ['$scope', '$cookies', 'UserService', '$state', '$rootScope'];
 
 exports['default'] = HomeController;
 module.exports = exports['default'];
@@ -584,30 +583,33 @@ var UserService = function UserService($http, SERVER, $cookies, $state) {
     }
   };
 
-  var User = function User(obj) {
-    this.name = obj.name;
+  var user = function user(obj) {
+    this.first_name = obj.first_name;
+    this.last_name = obj.last_name;
     this.email = obj.email;
     this.password = obj.password;
+    this.address = obj.address;
   };
 
   this.create = function (obj) {
-    var u = new User(obj);
-    return $http.post(SERVER.URL, u, SERVER.CONFIG);
+
+    var u = new user(obj);
+
+    return $http.post(SERVER.URL + 'signup', u);
   };
 
   this.sendLogin = function (userObj) {
-    return $http.post(SERVER.URL + 'login', userObj, SERVER.CONFIG);
-  };
-
-  this.loginSuccess = function (res) {
-    $cookies.put('authToken', res.data.auth_token);
-    SERVER.CONFIG.headers['XX-AUTH-TOKEN'] = res.data.auth_token;
-    $state.go('root.dash');
+    $http.post(SERVER.URL + 'login', userObj, SERVER.CONFIG).then(function (res) {
+      console.log(res);
+      $cookies.put('authToken', res.data.user.auth_token);
+      SERVER.CONFIG.headers['X-AUTH-TOKEN'] = res.data.user.auth_token;
+      $state.go('root.dashboard');
+    });
   };
 
   this.logout = function () {
     $cookies.remove('authToken');
-    SERVER.CONFIG.headers['XX-AUTH-TOKEN'] = null;
+    SERVER.CONFIG.headers['X-AUTH-TOKEN'] = null;
     $state.go('root.login');
   };
 };
