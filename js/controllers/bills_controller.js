@@ -1,5 +1,6 @@
 let BillsController = function($scope){
 
+  $scope.roomList=[];
 
 };
 

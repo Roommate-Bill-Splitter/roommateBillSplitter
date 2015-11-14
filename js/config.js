@@ -12,54 +12,54 @@ let config= function($stateProvider, $urlRouterProvider){
       templateUrl: 'templates/home.tpl.html'
     })
     .state('root.dashboard',{
-      url: '/dashboard/:id',
+      url: '/dashboard/',
       controller: 'DashController',
       templateUrl: 'templates/dash.tpl.html'
     })
     .state('root.charts',{
       url: '/charts/:id',
       controller: 'ChartController',
-      templateUrl: 'templates.charts.tpl.html'
+      templateUrl: 'templates/charts.tpl.html'  
     })
     .state('root.bills',{
       url: '/bills/:id',
       controller: 'BillsController',
-      templateUrl: 'templates.bills.tpl.html'
+      templateUrl: 'templates/bills.tpl.html'
     })
-    .state('root.bills.indBill',{
-      url: '/bills/:id/:billName',
+    .state('root.indBill',{
+      url: '/bills/:id/:billName',   
       controller: 'IndBillController',
-      templateUrl: 'templates.indBill.tpl.html'
+      templateUrl: 'templates/indBill.tpl.html'
     })
-    .state('root.bills.addBill',{
-      url: '/bills/add',
+    .state('root.addBill',{
+      url: '/bills/:id/add',
       controller: 'AddBillController',
-      templateUrl: 'templates.addBill.tpl.html'
+      templateUrl: 'templates/addBill.tpl.html'
     })
-    .state('root.bills.edit',{
+    .state('root.editBill',{
       url: '/bills/:id/edit',
       controller: 'EditBillController',
-      templateUrl: 'templates.editBill.tpl.html'
+      templateUrl: 'templates/editBill.tpl.html'
     })
     .state('root.roommates',{
-      url: '/roommates/:id',
+      url: '/roommates/',
       controller: 'RoomController',
-      templateUrl: 'templates.room.tpl.html'
+      templateUrl: 'templates/room.tpl.html'
     })
-    .state('root.roommates.bills',{
-      url: '/roommates/:id/bills',
+    .state('root.roomBills',{
+      url: '/roommates/bills',
       controller: 'RoomBillController',
-      templateUrl: 'templates.roomBill.tpl.html'
+      templateUrl: 'templates/roomBill.tpl.html'
     })
-    .state('root.roommates.add', {
+    .state('root.addRoommate', {
       url: '/roommates/add',
       controller: 'AddRoomController',
-      templateUrl: 'templates.addRoom.tpl.html'
+      templateUrl: 'templates/addRoom.tpl.html'
     })
-    .state('root.roommates.edit',{
-      url: '/roommates/:id/edit',
+    .state('root.editRoommates',{
+      url: '/roommates/edit',
       controller: 'EditRoomController',
-      templateUrl: 'templates.editRoom.tpl.html'
+      templateUrl: 'templates/editRoom.tpl.html'
     });
 };
 config.$inject = ['$stateProvider', '$urlRouterProvider'];

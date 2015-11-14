@@ -1,0 +1,29 @@
+<div class="chart">
+
+  <h2>{{title}}</h2>
+
+  <table >
+    <tbody>
+      <tr>
+        <th width="200">Name</th>
+        <th width="100">Bill</th>
+        <th width="100">Bill</th>
+        <th width="100">Bill</th>
+        <th width="100">Bill</th>
+        <th width="100">Bill</th>
+        <th width="100">Amount Due</th>
+      </tr>
+
+      <tr ng-repeat="roommate in roommates">
+        <td>{{ roommate.name }}</td>
+        <td>{{ roommate.bill }}</td>
+        <td>{{ roommate.bill }}</td>
+        <td>{{ roommate.bill }}</td>
+        <td>{{ roommate.bill }}</td>
+        <td>{{ roommate.bill }}</td>
+        <td>{{ roommate.bill }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

@@ -1,9 +1,20 @@
 // Put any @imports here
 // See Readme for a list of supported ones
 @import 'foundation';
+@import 'sweetalert';
 body {
   background: #e2ebf3;
+} 
+//GLOBAL STYLES
+//---------------------------------------
+//Style for the div around all FORMS
+.formWrapper {
+  width: 40%;
+  margin: 0 auto;
+  margin-top: 3%;
+  text-align: center;
 }
+
 .home  {
   background-image: url("../images/surrender.jpg");
   background-repeat: no-repeat;
@@ -58,3 +69,52 @@ body {
 .can{
   width: 300px;
 }
+
+//Styles Buttons
+.siteButtons {
+ 
+}
+//---------------------------------------
+.billMain{
+  width: 40%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+
+.chart {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center; 
+}
+
+
+
+//Roommates Page List of all roommates
+//---------------------------------------
+//for each roommate
+.roomWrapper {
+  width: 400px;
+  height: 200px;
+  margin: 5%;
+  background-color: pink;
+}
+//div wrapping the add btn / go back btn
+.addGoBack {
+  margin: 5%;
+}
+
+
+//Single Roommate
+//---------------------------------------
+.roommate {
+  width: 400px;
+  height: 200px;
+  margin: 5%;
+  background-color: pink;
+}
+
+//using addGoBack class from above for go back button
+
+
+

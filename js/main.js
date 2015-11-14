@@ -5,6 +5,8 @@ import angular from 'angular';
 import 'angular-ui-router';
 import 'angular-cookies';
 import config from './config';
+import 'sweetalert';
+import 'angular-h-sweetalert';
 //controllers
 import HomeController from './controllers/home_controller';
 import DashController from './controllers/dash_controller';
@@ -17,7 +19,10 @@ import RoomController from './controllers/room_controller';
 import RoomBillController from './controllers/room_bill_controller';
 import AddRoomController from './controllers/add_room_controller';
 import EditRoomController from './controllers/edit_room_controller';
-//services
+
+//Services
+import RoomService from './services/room_service';
+import ChartService from './services/chart_service';
 import UserService from './services/user_service';
 
 
@@ -27,9 +32,8 @@ import UserService from './services/user_service';
 
 
 
-
 angular
-  .module('app', ['ui.router', 'ngCookies'])
+  .module('app', ['ui.router', 'ngCookies', 'hSweetAlert'])
   .constant('SERVER', {
     URL: 'taco',
     CONFIG:{
@@ -48,5 +52,9 @@ angular
   .controller('RoomBillController', RoomBillController)
   .controller('AddRoomController', AddRoomController)
   .controller('EditRoomController', EditRoomController)
+
   .service('UserService', UserService)
+  .service('RoomService', RoomService)
+  .service('ChartService', ChartService)
+
 ;

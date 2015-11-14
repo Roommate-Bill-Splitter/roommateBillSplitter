@@ -1,0 +1,23 @@
+
+
+<h3 class="=roomTitle">My Roommates</h3>
+
+<div ng-repeat="roommate in roommates">
+
+  <div class="roomWrapper">
+    <h5>
+      <a href="#">
+        Name: {{roommate.name}}
+      </a>
+    </h5>
+  <button ng-click="viewRoomPage()">View Bills</button>
+  <button ng-click="deleteRoom()">Delete</button>
+  <button ng-click="editRoomPage()">Edit</button>
+
+  </div>
+</div>
+
+<div class="addGoBack">
+  <button ng-click="addRoomPage()">Add</button>
+  <button ng-click="goBack()">DashBoard</button>
+</div>
