@@ -7394,6 +7394,11 @@ body {
   margin: 0 auto;
   text-align: center; }
 
+.chart {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center; }
+
 .roomWrapper {
   width: 400px;
   height: 200px;
@@ -7408,10 +7413,5 @@ body {
   height: 200px;
   margin: 5%;
   background-color: pink; }
-
-.chart {
-  width: 80%;
-  margin: 0 auto;
-  text-align: center; }
 
 /*# sourceMappingURL=main.css.map */
