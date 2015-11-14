@@ -1,24 +1,29 @@
-<h2>{{title}}</h2>
+<div class="chart">
 
-<table >
-  <tbody>
-    <tr>
-      <th>Roommate</th>
-      <th>Bill</th>
-      <th>Bill</th>
-      <th>Bill</th>
-      <th>Bill</th>
-      <th>Bill</th>
-      <th>Bill</th>
-    </tr>
-    <tr>
-      <td>Name</td>
-      <td>amount</td>
-      <td>amount</td>
-      <td>amount</td>
-      <td>amount</td>
-      <td>amount</td>
-      <td>amount</td>
-    </tr>
-  </tbody>
-</table>
+  <h2>{{title}}</h2>
+
+  <table >
+    <tbody>
+      <tr>
+        <th width="200">Name</th>
+        <th width="100">Bill</th>
+        <th width="100">Bill</th>
+        <th width="100">Bill</th>
+        <th width="100">Bill</th>
+        <th width="100">Bill</th>
+        <th width="100">Amount Due</th>
+      </tr>
+
+      <tr ng-repeat="roommate in roommates">
+        <td>{{ roommate.name }}</td>
+        <td>{{ roommate.bill }}</td>
+        <td>{{ roommate.bill }}</td>
+        <td>{{ roommate.bill }}</td>
+        <td>{{ roommate.bill }}</td>
+        <td>{{ roommate.bill }}</td>
+        <td>{{ roommate.bill }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
