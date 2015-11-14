@@ -276,7 +276,7 @@ var HomeController = function HomeController($scope, $cookies, UserService, $sta
 
     UserService.create(user).then(function (res) {
       console.log(res);
-      $state.go('/dashboard/res.data.user.email');
+      $state.go('root.dashboard');
     });
   };
 
