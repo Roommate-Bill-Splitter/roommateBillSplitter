@@ -27,7 +27,7 @@ var config = function config($stateProvider, $urlRouterProvider) {
     controller: 'BillsController',
     templateUrl: 'templates/bills.tpl.html'
   }).state('root.indBill', {
-    url: '/bills/:id/:billName',
+    url: '/bills/SMANG:id/:billName', //CHANGE URL BACK *********************
     controller: 'IndBillController',
     templateUrl: 'templates/indBill.tpl.html'
   }).state('root.addBill', {
@@ -66,12 +66,31 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var AddBillController = function AddBillController($scope) {
+var AddBillController = function AddBillController($scope, $stateParams) {
 
   $scope.title = 'add bill';
+  $scope.newBill = {};
+
+  function Bill(obj) {
+    this.name = obj.name;
+    this.amount = obj.amount;
+    this.due = obj.due;
+  }
+
+  $scope.addBill = function (bill) {
+    var x = new Bill(bill);
+    $scope.newBill = {
+      name: x.name,
+      amount: x.amount,
+      due: x.due
+    };
+    console.log($scope.newBill);
+
+    //post request with newBill
+  };
 };
 
-AddBillController.$inject = ['$scope'];
+AddBillController.$inject = ['$scope', '$stateParams'];
 
 exports['default'] = AddBillController;
 module.exports = exports['default'];
@@ -96,7 +115,8 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 var BillsController = function BillsController($scope) {
-  $scope.title = 'bill nye';
+
+  $scope.roomList = [];
 };
 
 BillsController.$inject = ['$scope'];
@@ -184,9 +204,20 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var IndBillController = function IndBillController($scope) {};
+var IndBillController = function IndBillController($scope, $stateParams) {
+  //get request for individual bill using $stateParams.id
+  $scope.results = //whatever
 
-IndBillController.$inject = ['$scope'];
+  $scope.deleteBill = function () {
+    //delete request
+  };
+
+  $scope.editBill = function () {
+    //put request
+  };
+};
+
+IndBillController.$inject = ['$scope', '$stateParams'];
 
 exports['default'] = IndBillController;
 module.exports = exports['default'];
