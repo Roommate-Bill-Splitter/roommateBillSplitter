@@ -7384,52 +7384,11 @@ body {
   background: #969FA5; }
 
 .formWrapper {
-<<<<<<< HEAD
   width: 40%;
   margin: 0 auto;
   margin-top: 3%;
   text-align: center; }
 
-.home {
-  background-image: url("../images/surrender.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: right 100px top 0;
-  height: 800px;
-  width: 100%;
-  margin: 0 auto; }
-
-.group {
-  width: 90%; }
-  .group .signup {
-    width: 30%;
-    float: right;
-    margin: 5% 5%; }
-  .group .log {
-    width: 30%;
-    float: left;
-    margin: 5% 5%; }
-
-.signup {
-  float: right; }
-
-.log {
-  float: left; }
-
-.can {
-  width: 300px; }
-
-.billMain {
-=======
->>>>>>> 57aa777fbdeaa674addb65d1dab692265a6fabce
-  width: 40%;
-  margin: 0 auto;
-  text-align: center; }
-
-<<<<<<< HEAD
-.chart {
-  width: 80%;
-=======
 .homeWrapper {
   width: 100%; }
   .homeWrapper .home {
@@ -7463,7 +7422,6 @@ body {
 
 .billMain {
   width: 40%;
->>>>>>> 57aa777fbdeaa674addb65d1dab692265a6fabce
   margin: 0 auto;
   text-align: center; }
 

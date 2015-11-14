@@ -242,7 +242,7 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var HomeController = function HomeController($scope, $cookies, UserService, $state, $rootScope) {
+var HomeController = function HomeController($scope, $cookies, UserService, $state) {
 
   $scope.create = function (user) {
     UserService.create(user).then(function (res) {
@@ -262,7 +262,7 @@ var HomeController = function HomeController($scope, $cookies, UserService, $sta
   };
 };
 
-HomeController.$inject = ['$scope', 'UserService', '$cookies', '$state', '$rootScope'];
+HomeController.$inject = ['$scope', 'UserService', '$cookies', '$state'];
 
 exports['default'] = HomeController;
 module.exports = exports['default'];
