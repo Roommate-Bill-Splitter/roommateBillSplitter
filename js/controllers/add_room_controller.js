@@ -1,4 +1,5 @@
-let AddRoomController = function($scope){
+let AddRoomController = function($scope, RoomService, $state){
+
 
   $scope.addRoommate = (obj) => {
     RoomService.addRoommate(obj).then( (res) => {
@@ -7,8 +8,12 @@ let AddRoomController = function($scope){
     });//RoomService
   }
 
+  $scope.goBack = function() {
+    $state.go('root.roommates');
+  }
+
 };
 
-AddRoomController.$inject = ['$scope'];
+AddRoomController.$inject = ['$scope', 'RoomService', '$state'];
 
 export default AddRoomController;
