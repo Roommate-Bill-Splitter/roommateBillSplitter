@@ -4,9 +4,10 @@
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var config = function config($stateProvider, $urlRouterProvider) {
+var config = function config($stateProvider, $urlRouterProvider, $httpProvider) {
   $urlRouterProvider.otherwise('/');
-
+  // $httpProvider.defaults.useXDomain = true;
+  // delete $httpProvider.defaults.headers.common['X-Requested-With'];
   $stateProvider.state('root', {
     abstract: true,
     templateUrl: 'templates/layout.tpl.html'
@@ -56,7 +57,7 @@ var config = function config($stateProvider, $urlRouterProvider) {
     templateUrl: 'templates/editRoom.tpl.html'
   });
 };
-config.$inject = ['$stateProvider', '$urlRouterProvider'];
+config.$inject = ['$stateProvider', '$urlRouterProvider', '$httpProvider'];
 exports['default'] = config;
 module.exports = exports['default'];
 
@@ -207,7 +208,7 @@ var _jquery = require('jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var EditBillController = function EditBillController($scope, sweet, $state) {
+var EditBillController = function EditBillController($scope, sweet, $state, $http, SERVER) {
 
   function Bill(obj) {
     this.name = obj.name;
@@ -237,7 +238,7 @@ var EditBillController = function EditBillController($scope, sweet, $state) {
   };
 };
 
-EditBillController.$inject = ['$scope', 'sweet', '$state'];
+EditBillController.$inject = ['$scope', 'sweet', '$state', '$http', 'SERVER'];
 
 exports['default'] = EditBillController;
 module.exports = exports['default'];
@@ -480,9 +481,9 @@ var _servicesBill_service = require('./services/bill_service');
 var _servicesBill_service2 = _interopRequireDefault(_servicesBill_service);
 
 _angular2['default'].module('app', ['ui.router', 'ngCookies', 'hSweetAlert']).constant('SERVER', {
-  URL: 'taco',
+  URL: 'https://mighty-lowlands-7785.herokuapp.com/',
   CONFIG: {
-    empty: 'fornow'
+    headers: {}
   }
 }).config(_config2['default']).controller('HomeController', _controllersHome_controller2['default']).controller('DashController', _controllersDash_controller2['default']).controller('ChartController', _controllersChart_controller2['default']).controller('BillsController', _controllersBills_controller2['default']).controller('IndBillController', _controllersInd_bill_controller2['default']).controller('AddBillController', _controllersAdd_bill_controller2['default']).controller('EditBillController', _controllersEdit_bill_controller2['default']).controller('RoomController', _controllersRoom_controller2['default']).controller('RoomBillController', _controllersRoom_bill_controller2['default']).controller('AddRoomController', _controllersAdd_room_controller2['default']).controller('EditRoomController', _controllersEdit_room_controller2['default']).service('UserService', _servicesUser_service2['default']).service('RoomService', _servicesRoom_service2['default']).service('ChartService', _servicesChart_service2['default']).service('BillService', _servicesBill_service2['default']);
 

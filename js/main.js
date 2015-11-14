@@ -35,9 +35,9 @@ import BillService from './services/bill_service';
 angular
   .module('app', ['ui.router', 'ngCookies', 'hSweetAlert'])
   .constant('SERVER', {
-    URL: 'taco',
+    URL: 'https://mighty-lowlands-7785.herokuapp.com/',
     CONFIG:{
-      empty: 'fornow'
+      headers: {}
     }
   })
   .config(config)
