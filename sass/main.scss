@@ -15,7 +15,7 @@ body {
 }
 //Styles Buttons
 .siteButtons {
-
+ 
 }
 //---------------------------------------
 .billMain{
@@ -23,4 +23,32 @@ body {
   margin: 0 auto;
   text-align: center;
 }
+
+
+//Roommates Page List of all roommates
+//---------------------------------------
+//for each roommate
+.roomWrapper {
+  width: 400px;
+  height: 200px;
+  margin: 5%;
+  background-color: pink;
+}
+//div wrapping the add btn / go back btn
+.addGoBack {
+  margin: 5%;
+}
+
+
+//Single Roommate
+//---------------------------------------
+.roommate {
+  width: 400px;
+  height: 200px;
+  margin: 5%;
+  background-color: pink;
+}
+
+//using addGoBack class from above for go back button
+
 
