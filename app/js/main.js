@@ -110,7 +110,7 @@ AddBillController.$inject = ['$scope', '$stateParams', 'sweet', '$state'];
 exports['default'] = AddBillController;
 module.exports = exports['default'];
 
-},{"jquery":23}],3:[function(require,module,exports){
+},{"jquery":24}],3:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -242,7 +242,7 @@ EditBillController.$inject = ['$scope', 'sweet', '$state'];
 exports['default'] = EditBillController;
 module.exports = exports['default'];
 
-},{"jquery":23}],8:[function(require,module,exports){
+},{"jquery":24}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -475,14 +475,31 @@ var _servicesUser_service = require('./services/user_service');
 
 var _servicesUser_service2 = _interopRequireDefault(_servicesUser_service);
 
+var _servicesBill_service = require('./services/bill_service');
+
+var _servicesBill_service2 = _interopRequireDefault(_servicesBill_service);
+
 _angular2['default'].module('app', ['ui.router', 'ngCookies', 'hSweetAlert']).constant('SERVER', {
   URL: 'taco',
   CONFIG: {
     empty: 'fornow'
   }
-}).config(_config2['default']).controller('HomeController', _controllersHome_controller2['default']).controller('DashController', _controllersDash_controller2['default']).controller('ChartController', _controllersChart_controller2['default']).controller('BillsController', _controllersBills_controller2['default']).controller('IndBillController', _controllersInd_bill_controller2['default']).controller('AddBillController', _controllersAdd_bill_controller2['default']).controller('EditBillController', _controllersEdit_bill_controller2['default']).controller('RoomController', _controllersRoom_controller2['default']).controller('RoomBillController', _controllersRoom_bill_controller2['default']).controller('AddRoomController', _controllersAdd_room_controller2['default']).controller('EditRoomController', _controllersEdit_room_controller2['default']).service('UserService', _servicesUser_service2['default']).service('RoomService', _servicesRoom_service2['default']).service('ChartService', _servicesChart_service2['default']);
+}).config(_config2['default']).controller('HomeController', _controllersHome_controller2['default']).controller('DashController', _controllersDash_controller2['default']).controller('ChartController', _controllersChart_controller2['default']).controller('BillsController', _controllersBills_controller2['default']).controller('IndBillController', _controllersInd_bill_controller2['default']).controller('AddBillController', _controllersAdd_bill_controller2['default']).controller('EditBillController', _controllersEdit_bill_controller2['default']).controller('RoomController', _controllersRoom_controller2['default']).controller('RoomBillController', _controllersRoom_bill_controller2['default']).controller('AddRoomController', _controllersAdd_room_controller2['default']).controller('EditRoomController', _controllersEdit_room_controller2['default']).service('UserService', _servicesUser_service2['default']).service('RoomService', _servicesRoom_service2['default']).service('ChartService', _servicesChart_service2['default']).service('BillService', _servicesBill_service2['default']);
 
-},{"./config":1,"./controllers/add_bill_controller":2,"./controllers/add_room_controller":3,"./controllers/bills_controller":4,"./controllers/chart_controller":5,"./controllers/dash_controller":6,"./controllers/edit_bill_controller":7,"./controllers/edit_room_controller":8,"./controllers/home_controller":9,"./controllers/ind_bill_controller":10,"./controllers/room_bill_controller":11,"./controllers/room_controller":12,"./services/chart_service":14,"./services/room_service":15,"./services/user_service":16,"angular":22,"angular-cookies":18,"angular-h-sweetalert":19,"angular-ui-router":20,"jquery":23,"moment":24,"sweetalert":33,"underscore":34}],14:[function(require,module,exports){
+},{"./config":1,"./controllers/add_bill_controller":2,"./controllers/add_room_controller":3,"./controllers/bills_controller":4,"./controllers/chart_controller":5,"./controllers/dash_controller":6,"./controllers/edit_bill_controller":7,"./controllers/edit_room_controller":8,"./controllers/home_controller":9,"./controllers/ind_bill_controller":10,"./controllers/room_bill_controller":11,"./controllers/room_controller":12,"./services/bill_service":14,"./services/chart_service":15,"./services/room_service":16,"./services/user_service":17,"angular":23,"angular-cookies":19,"angular-h-sweetalert":20,"angular-ui-router":21,"jquery":24,"moment":25,"sweetalert":34,"underscore":35}],14:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+var BillService = function BillService($http) {};
+
+BillService.$inject = ['$http'];
+
+exports['default'] = BillService;
+module.exports = exports['default'];
+
+},{}],15:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -508,7 +525,7 @@ ChartService.$inject = ['$http', 'SERVER'];
 exports['default'] = ChartService;
 module.exports = exports['default'];
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -547,7 +564,7 @@ RoomService.$inject = ['$http'];
 exports['default'] = RoomService;
 module.exports = exports['default'];
 
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -599,7 +616,7 @@ UserService.$inject = ['$http', 'SERVER', '$cookies', '$state'];
 exports['default'] = UserService;
 module.exports = exports['default'];
 
-},{}],17:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 /**
  * @license AngularJS v1.4.7
  * (c) 2010-2015 Google, Inc. http://angularjs.org
@@ -922,11 +939,11 @@ angular.module('ngCookies').provider('$$cookieWriter', function $$CookieWriterPr
 
 })(window, window.angular);
 
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 require('./angular-cookies');
 module.exports = 'ngCookies';
 
-},{"./angular-cookies":17}],19:[function(require,module,exports){
+},{"./angular-cookies":18}],20:[function(require,module,exports){
 /**
  * angular-h-sweetalert is a simple wrapper of sweetalert.
  *
@@ -984,7 +1001,7 @@ module.exports = 'ngCookies';
 
 }(angular, window));
 
-},{"sweetalert":33}],20:[function(require,module,exports){
+},{"sweetalert":34}],21:[function(require,module,exports){
 /**
  * State-based routing for AngularJS
  * @version v0.2.15
@@ -5355,7 +5372,7 @@ angular.module('ui.router.state')
   .filter('isState', $IsStateFilter)
   .filter('includedByState', $IncludedByStateFilter);
 })(window, window.angular);
-},{}],21:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 /**
  * @license AngularJS v1.4.7
  * (c) 2010-2015 Google, Inc. http://angularjs.org
@@ -34260,11 +34277,11 @@ $provide.value("$locale", {
 })(window, document);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],22:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":21}],23:[function(require,module,exports){
+},{"./angular":22}],24:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
@@ -43476,7 +43493,7 @@ return jQuery;
 
 }));
 
-},{}],24:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 //! moment.js
 //! version : 2.10.6
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -46672,7 +46689,7 @@ return jQuery;
     return _moment;
 
 }));
-},{}],25:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -46705,7 +46722,7 @@ var defaultParams = {
 
 exports['default'] = defaultParams;
 module.exports = exports['default'];
-},{}],26:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -46841,7 +46858,7 @@ exports['default'] = {
   handleCancel: handleCancel
 };
 module.exports = exports['default'];
-},{"./handle-dom":27,"./handle-swal-dom":29,"./utils":32}],27:[function(require,module,exports){
+},{"./handle-dom":28,"./handle-swal-dom":30,"./utils":33}],28:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -47033,7 +47050,7 @@ exports.fadeIn = fadeIn;
 exports.fadeOut = fadeOut;
 exports.fireClick = fireClick;
 exports.stopEventPropagation = stopEventPropagation;
-},{}],28:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -47113,7 +47130,7 @@ var handleKeyDown = function handleKeyDown(event, params, modal) {
 
 exports['default'] = handleKeyDown;
 module.exports = exports['default'];
-},{"./handle-dom":27,"./handle-swal-dom":29}],29:[function(require,module,exports){
+},{"./handle-dom":28,"./handle-swal-dom":30}],30:[function(require,module,exports){
 'use strict';
 
 var _interopRequireWildcard = function (obj) { return obj && obj.__esModule ? obj : { 'default': obj }; };
@@ -47281,7 +47298,7 @@ exports.openModal = openModal;
 exports.resetInput = resetInput;
 exports.resetInputError = resetInputError;
 exports.fixVerticalPosition = fixVerticalPosition;
-},{"./default-params":25,"./handle-dom":27,"./injected-html":30,"./utils":32}],30:[function(require,module,exports){
+},{"./default-params":26,"./handle-dom":28,"./injected-html":31,"./utils":33}],31:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -47324,7 +47341,7 @@ var injectedHTML =
 
 exports["default"] = injectedHTML;
 module.exports = exports["default"];
-},{}],31:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -47550,7 +47567,7 @@ var setParameters = function setParameters(params) {
 
 exports['default'] = setParameters;
 module.exports = exports['default'];
-},{"./handle-dom":27,"./handle-swal-dom":29,"./utils":32}],32:[function(require,module,exports){
+},{"./handle-dom":28,"./handle-swal-dom":30,"./utils":33}],33:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -47624,7 +47641,7 @@ exports.hexToRgb = hexToRgb;
 exports.isIE8 = isIE8;
 exports.logStr = logStr;
 exports.colorLuminance = colorLuminance;
-},{}],33:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 'use strict';
 
 var _interopRequireWildcard = function (obj) { return obj && obj.__esModule ? obj : { 'default': obj }; };
@@ -47928,7 +47945,7 @@ if (typeof window !== 'undefined') {
   _extend$hexToRgb$isIE8$logStr$colorLuminance.logStr('SweetAlert is a frontend module!');
 }
 module.exports = exports['default'];
-},{"./modules/default-params":25,"./modules/handle-click":26,"./modules/handle-dom":27,"./modules/handle-key":28,"./modules/handle-swal-dom":29,"./modules/set-params":31,"./modules/utils":32}],34:[function(require,module,exports){
+},{"./modules/default-params":26,"./modules/handle-click":27,"./modules/handle-dom":28,"./modules/handle-key":29,"./modules/handle-swal-dom":30,"./modules/set-params":32,"./modules/utils":33}],35:[function(require,module,exports){
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
