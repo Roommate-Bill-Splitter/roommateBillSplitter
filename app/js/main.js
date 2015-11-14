@@ -21,39 +21,39 @@ var config = function config($stateProvider, $urlRouterProvider) {
   }).state('root.charts', {
     url: '/charts/:id',
     controller: 'ChartController',
-    templateUrl: 'templates.charts.tpl.html'
+    templateUrl: 'templates/charts.tpl.html'
   }).state('root.bills', {
     url: '/bills/:id',
     controller: 'BillsController',
-    templateUrl: 'templates.bills.tpl.html'
+    templateUrl: 'templates/bills.tpl.html'
   }).state('root.bills.indBill', {
     url: '/bills/:id/:billName',
     controller: 'IndBillController',
-    templateUrl: 'templates.indBill.tpl.html'
+    templateUrl: 'templates/indBill.tpl.html'
   }).state('root.bills.addBill', {
     url: '/bills/add',
     controller: 'AddBillController',
-    templateUrl: 'templates.addBill.tpl.html'
+    templateUrl: 'templates/addBill.tpl.html'
   }).state('root.bills.edit', {
     url: '/bills/:id/edit',
     controller: 'EditBillController',
-    templateUrl: 'templates.editBill.tpl.html'
+    templateUrl: 'templates/editBill.tpl.html'
   }).state('root.roommates', {
     url: '/roommates/:id',
     controller: 'RoomController',
-    templateUrl: 'templates.room.tpl.html'
+    templateUrl: 'templates/room.tpl.html'
   }).state('root.roommates.bills', {
     url: '/roommates/:id/bills',
     controller: 'RoomBillController',
-    templateUrl: 'templates.roomBill.tpl.html'
+    templateUrl: 'templates/roomBill.tpl.html'
   }).state('root.roommates.add', {
     url: '/roommates/add',
     controller: 'AddRoomController',
-    templateUrl: 'templates.addRoom.tpl.html'
+    templateUrl: 'templates/addRoom.tpl.html'
   }).state('root.roommates.edit', {
     url: '/roommates/:id/edit',
     controller: 'EditRoomController',
-    templateUrl: 'templates.editRoom.tpl.html'
+    templateUrl: 'templates/editRoom.tpl.html'
   });
 };
 config.$inject = ['$stateProvider', '$urlRouterProvider'];
@@ -105,7 +105,10 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var ChartController = function ChartController($scope) {};
+var ChartController = function ChartController($scope) {
+
+  $scope.title = 'chart controller';
+};
 
 ChartController.$inject = ['$scope'];
 
@@ -118,7 +121,10 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var DashController = function DashController($scope) {};
+var DashController = function DashController($scope) {
+
+  $scope.title = 'dash controller';
+};
 
 DashController.$inject = ['$scope'];
 
