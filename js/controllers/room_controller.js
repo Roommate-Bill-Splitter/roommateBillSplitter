@@ -1,5 +1,10 @@
 let RoomController = function($scope, RoomService, $state){
 
+
+  //Get a list of all the roommates
+
+
+  
   $scope.viewRoomPage = function() {
     // console.log('View Me!');
     $state.go('root.roomBills');

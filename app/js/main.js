@@ -109,12 +109,19 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var AddRoomController = function AddRoomController($scope, RoomService, $state) {
+var AddRoomController = function AddRoomController($scope, RoomService, $state, sweet) {
 
   $scope.addRoommate = function (obj) {
     RoomService.addRoommate(obj).then(function (res) {
-      $scope.roommate = {};
-      alert("You Added a Roommate");
+
+      sweet.show({
+        title: 'Roommate Added!',
+        text: 'Congrats.',
+        confirmButtonText: "K cool"
+      }, function () {
+        $state.go('root.roommates');
+        $scope.roomate = {};
+      });
     }); //RoomService
   };
 
@@ -123,7 +130,7 @@ var AddRoomController = function AddRoomController($scope, RoomService, $state) 
   };
 };
 
-AddRoomController.$inject = ['$scope', 'RoomService', '$state'];
+AddRoomController.$inject = ['$scope', 'RoomService', '$state', 'sweet'];
 
 exports['default'] = AddRoomController;
 module.exports = exports['default'];
@@ -150,12 +157,16 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var ChartController = function ChartController($scope) {
+var ChartController = function ChartController($scope, ChartService) {
 
-  $scope.title = 'chart controller';
+  $scope.title = 'Bill Chart';
+
+  ChartService.getRoommates().then(function (res) {
+    $scope.roommates = res.data.results;
+  });
 };
 
-ChartController.$inject = ['$scope'];
+ChartController.$inject = ['$scope', 'ChartService'];
 
 exports['default'] = ChartController;
 module.exports = exports['default'];
@@ -309,6 +320,8 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 var RoomController = function RoomController($scope, RoomService, $state) {
+
+  //Get a list of all the roommates
 
   $scope.viewRoomPage = function () {
     // console.log('View Me!');

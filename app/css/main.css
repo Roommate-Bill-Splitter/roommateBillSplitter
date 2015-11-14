@@ -7383,19 +7383,30 @@ body.stop-scrolling {
 body {
   background: #e2ebf3; }
 
+.formWrapper {
+  width: 40%;
+  margin: 0 auto;
+  margin-top: 3%;
+  text-align: center; }
+
 .billMain {
   width: 40%;
   margin: 0 auto;
   text-align: center; }
 
-.addBill {
-  width: 40%;
-  margin: 0 auto;
-  text-align: center; }
+.roomWrapper {
+  width: 400px;
+  height: 200px;
+  margin: 5%;
+  background-color: pink; }
 
-.editBill {
-  width: 40%;
-  margin: 0 auto;
-  text-align: center; }
+.addGoBack {
+  margin: 5%; }
+
+.roommate {
+  width: 400px;
+  height: 200px;
+  margin: 5%;
+  background-color: pink; }
 
 /*# sourceMappingURL=main.css.map */
