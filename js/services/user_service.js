@@ -17,7 +17,7 @@ let UserService = function($http, SERVER, $cookies, $state) {
     this.password = obj.password;
   };
 
-  this.create = function(obj){
+  this.createUser = function(obj){
     let u = new User(obj);
     return $http.post(SERVER.URL, u, SERVER.CONFIG);
   }

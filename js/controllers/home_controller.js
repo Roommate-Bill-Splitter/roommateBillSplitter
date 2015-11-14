@@ -1,9 +1,10 @@
 let HomeController = function($scope, $cookies, UserService, $state, $rootScope){
  
-  $rootScope.bgimg = "Utility_Bills.gif";
 
   $scope.create = function(user){
-    UserService.create($scope.user);
+    UserService.create(user).then((res) =>{
+      $scope.create= {};
+    });
     $state.go('/dashboard/:id');
   }
 

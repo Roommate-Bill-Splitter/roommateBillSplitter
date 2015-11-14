@@ -7383,7 +7383,12 @@ body.stop-scrolling {
 body {
   background: #e2ebf3; }
 
-<<<<<<< HEAD
+.formWrapper {
+  width: 40%;
+  margin: 0 auto;
+  margin-top: 3%;
+  text-align: center; }
+
 .home {
   background-image: url("../images/surrender.jpg");
   background-repeat: no-repeat;
@@ -7412,15 +7417,14 @@ body {
 
 .can {
   width: 300px; }
-=======
-.formWrapper {
-  width: 40%;
-  margin: 0 auto;
-  margin-top: 3%;
-  text-align: center; }
 
 .billMain {
   width: 40%;
+  margin: 0 auto;
+  text-align: center; }
+
+.chart {
+  width: 80%;
   margin: 0 auto;
   text-align: center; }
 
@@ -7438,11 +7442,5 @@ body {
   height: 200px;
   margin: 5%;
   background-color: pink; }
-
-.chart {
-  width: 80%;
-  margin: 0 auto;
-  text-align: center; }
->>>>>>> b57c433abedba0b1cf8df77e5a3fdcf451400c7a
 
 /*# sourceMappingURL=main.css.map */
