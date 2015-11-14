@@ -1,6 +1,22 @@
 // Put any @imports here
 // See Readme for a list of supported ones
 @import 'foundation';
+@import 'sweetalert';
 body {
   background: #e2ebf3;
+} 
+.billMain{
+  width: 40%;
+  margin: 0 auto;
+  text-align: center;
+}
+.addBill{
+  width: 40%;
+  margin: 0 auto;
+  text-align: center;
+}
+.editBill{
+  width: 40%;
+  margin: 0 auto;
+  text-align: center;
 }

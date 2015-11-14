@@ -1,8 +1,10 @@
-<h2>Add a Bill</h2>
-
-<form ng-submit= "addBill(bill)">
-  <input type="text" ng-model="bill.name" placeholder="Bill Name">
-  <input type="text" ng-model="bill.amount" placeholder="Bill Amount">
-  <input type="text" ng-model="bill.due" placeholder="Due Date">
-  <button>Add</button>
-</form>  
+<div class="addBill">
+  <h2>Add a Bill</h2>
+  <form ng-submit= "addBill(bill)">
+    <input type="text" ng-model="bill.name" >
+    <input type="text" ng-model="bill.amount">
+    <input type="text" ng-model="bill.due">
+    <button>Add</button>
+  </form>  
+    
+</div>

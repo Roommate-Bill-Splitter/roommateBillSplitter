@@ -1,4 +1,4 @@
-let AddBillController = function($scope, $stateParams){
+let AddBillController = function($scope, $stateParams, sweet, $state){
 
   $scope.title = 'add bill';
   $scope.newBill={};
@@ -17,7 +17,15 @@ let AddBillController = function($scope, $stateParams){
       due: x.due
     };
     console.log($scope.newBill);
-    
+    sweet.show({
+          title:'Bill Added!',
+          text: 'Congrats.',
+          confirmButtonText: "K cool"
+      }, function(){
+        $state.go('root.bills')
+        $scope.bill={};
+      });
+
     //post request with newBill
     
   }
@@ -25,6 +33,6 @@ let AddBillController = function($scope, $stateParams){
 
 };
 
-AddBillController.$inject = ['$scope', '$stateParams'];
+AddBillController.$inject = ['$scope', '$stateParams', 'sweet', '$state'];
 
 export default AddBillController;
