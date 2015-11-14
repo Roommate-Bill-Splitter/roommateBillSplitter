@@ -26,17 +26,17 @@ let config= function($stateProvider, $urlRouterProvider){
       controller: 'BillsController',
       templateUrl: 'templates/bills.tpl.html'
     })
-    .state('root.bills.indBill',{
+    .state('root.indBill',{
       url: '/bills/:id/:billName',
       controller: 'IndBillController',
       templateUrl: 'templates/indBill.tpl.html'
     })
-    .state('root.bills.addBill',{
-      url: '/bills/add',
+    .state('root.addBill',{
+      url: '/bills/:id/add',
       controller: 'AddBillController',
       templateUrl: 'templates/addBill.tpl.html'
     })
-    .state('root.bills.edit',{
+    .state('root.editBill',{
       url: '/bills/:id/edit',
       controller: 'EditBillController',
       templateUrl: 'templates/editBill.tpl.html'
@@ -46,17 +46,17 @@ let config= function($stateProvider, $urlRouterProvider){
       controller: 'RoomController',
       templateUrl: 'templates/room.tpl.html'
     })
-    .state('root.roommates.bills',{
+    .state('root.roomBills',{
       url: '/roommates/:id/bills',
       controller: 'RoomBillController',
       templateUrl: 'templates/roomBill.tpl.html'
     })
-    .state('root.roommates.add', {
+    .state('root.addRoommate', {
       url: '/roommates/add',
       controller: 'AddRoomController',
       templateUrl: 'templates/addRoom.tpl.html'
     })
-    .state('root.roommates.edit',{
+    .state('root.editRoommates',{
       url: '/roommates/:id/edit',
       controller: 'EditRoomController',
       templateUrl: 'templates/editRoom.tpl.html'
