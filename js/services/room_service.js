@@ -28,12 +28,16 @@ let RoomService = function($http, SERVER) {
     this.name = obj.name;
     this.email = obj.email;
     this.phone = obj.phone;
-    this.house_id = obj.house_id;
+    this.user_id = obj.user_id;
   }
 
   this.addRoommate = function(obj) {
+    let token = $cookies.get('authToken')
     let mate = new Roommate(obj);
-
+    console.log(mate);
+     return $http.post(url, mate, SERVER.CONFIG.headers: {
+      auth_toke: token;
+     });
 
   }
   

@@ -131,16 +131,11 @@ Object.defineProperty(exports, '__esModule', {
 var AddRoomController = function AddRoomController($scope, RoomService, $state, sweet) {
 
   $scope.addRoommate = function (obj) {
+    console.log(obj);
     RoomService.addRoommate(obj).then(function (res) {
 
-      sweet.show({
-        title: 'Roommate Added!',
-        text: 'Congrats.',
-        confirmButtonText: "K cool"
-      }, function () {
-        $state.go('root.roommates');
-        $scope.roomate = {};
-      });
+      $state.go('root.roommates');
+      $scope.roomate = {};
     }); //RoomService
   };
 
@@ -377,6 +372,7 @@ var RoomController = function RoomController($scope, RoomService, $state) {
 
   //Get a list of all the roommates
   RoomService.getRoommates().then(function (res) {
+    console.log(res);
     $scope.roommates = res.data;
   });
 
@@ -400,7 +396,6 @@ var RoomController = function RoomController($scope, RoomService, $state) {
   };
   //Go to the add a roommate page
   $scope.addRoomPage = function () {
-    // console.log('Added');
     $state.go('root.addRoommate');
   };
   //Go back to the dashboard
@@ -591,11 +586,13 @@ var RoomService = function RoomService($http, SERVER) {
     this.name = obj.name;
     this.email = obj.email;
     this.phone = obj.phone;
-    this.house_id = obj.house_id;
+    this.user_id = obj.user_id;
   };
 
   this.addRoommate = function (obj) {
     var mate = new Roommate(obj);
+    console.log(mate);
+    return $http.post(url, mate, SERVER.CONFIG);
   };
 
   //Delete a roommate
