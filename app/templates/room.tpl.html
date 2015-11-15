@@ -6,12 +6,14 @@
 
   <div class="roomWrapper">
     <h5>
-      <a href="#">
+      <a href="#/roommates/{{roommate.id}}">
         Name: {{roommate.name}}
+        ID: {{roommate.id}}
+        Email: {{roommate.email}}
+        Phone: {{roommate.phone}}
       </a>
     </h5>
   <button ng-click="viewRoomPage()">View Bills</button>
-  <button ng-click="deleteRoom()">Delete</button>
   <button ng-click="editRoomPage()">Edit</button>
 
   </div>
