@@ -42,12 +42,14 @@ let id = $cookies.get('user_id');
         email: mate.email,
         phone: mate.phone,
         user_id: id
+
         
       } //data
 
      })//$http
         .then((res)=>{
       console.log(res);
+      $scope.roommates = res.data.roommate;
     })
   }; 
 
