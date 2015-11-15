@@ -29,9 +29,8 @@ let AddBillController = function($scope, $stateParams, sweet, $state, SERVER, $h
     
     //post request with newBill
     let token = $cookies.get('authToken');
-    console.log(token);
     $http({
-      url: SERVER.URL + 'bills',
+      url: SERVER.URL + 'bill',
       method: 'POST',
       headers:{
         auth_token: token

@@ -1,9 +1,9 @@
 <div class="bills">
-  <h2>{{results.name}}</h2>
+  <h2>{{results.title}}</h2>
   <h4>Amount: {{results.amount}}</h4>
-  <h4>Due: {{results.due}}</h4>
+  <h4>Due: {{results.due_date}}</h4>
   <button ng-click="deleteBill()">Delete</button>
-  <form ng-submit="editBill()">
-  <button>Edit Bill</button>
-  </form>
+  
+  <a href="#/bills/{{results.id}}/edit">Edit Bill</a>
+  
 </div>
