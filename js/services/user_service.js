@@ -1,13 +1,15 @@
-import $ from 'jquery';
-
 let UserService = function($http, SERVER, $cookies, $state) {
   
   this.checkAuth = function() {
 
     let token = $cookies.get('authToken');
-     if(token){
-      console.log('welcome')};
-}
+
+    if (token) {
+      return  $http.get(SERVER.URL, SERVER.CONFIG);
+    } else {
+      $state.go('root.home');
+    }
+  }
 
   let user = function (obj) {
     this.first_name = obj.first_name;
@@ -27,6 +29,7 @@ let UserService = function($http, SERVER, $cookies, $state) {
 
   this.sendLogin = function(userObj){
     $http.post(SERVER.URL + 'login', userObj, SERVER.CONFIG).then((res)=>{
+      console.log(res);
       $cookies.put('authToken', res.data.user.auth_token);
       SERVER.CONFIG.headers['X-AUTH-TOKEN'] = res.data.user.auth_token;
       $state.go('root.dashboard')
