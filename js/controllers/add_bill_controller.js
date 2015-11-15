@@ -1,5 +1,5 @@
 import $ from 'jquery';
-let AddBillController = function($scope, $stateParams, sweet, $state){
+let AddBillController = function($scope, $stateParams, sweet, $state, SERVER, $http, $cookies){
 
   $scope.title = 'add bill';
   $scope.newBill={};
@@ -28,12 +28,22 @@ let AddBillController = function($scope, $stateParams, sweet, $state){
       });
     
     //post request with newBill
-    
+    let token = $cookies.get('authToken');
+    console.log(token);
+    $http({
+      url: SERVER.URL + 'bills',
+      method: 'POST',
+      headers:{
+        auth_token: token
+      }
+    }).then((res)=>{
+      console.log(res);
+    })
   }
 
 
 };
 
-AddBillController.$inject = ['$scope', '$stateParams', 'sweet', '$state'];
+AddBillController.$inject = ['$scope', '$stateParams', 'sweet', '$state', 'SERVER', '$http', '$cookies'];
 
 export default AddBillController;

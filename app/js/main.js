@@ -28,7 +28,7 @@ var config = function config($stateProvider, $urlRouterProvider, $httpProvider) 
     controller: 'BillsController',
     templateUrl: 'templates/bills.tpl.html'
   }).state('root.indBill', {
-    url: '/bills/:id/:billName',
+    url: '/bills/x:id/:billName',
     controller: 'IndBillController',
     templateUrl: 'templates/indBill.tpl.html'
   }).state('root.addBill', {
@@ -74,7 +74,7 @@ var _jquery = require('jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var AddBillController = function AddBillController($scope, $stateParams, sweet, $state) {
+var AddBillController = function AddBillController($scope, $stateParams, sweet, $state, SERVER, $http, $cookies) {
 
   $scope.title = 'add bill';
   $scope.newBill = {};
@@ -103,10 +103,21 @@ var AddBillController = function AddBillController($scope, $stateParams, sweet, 
     });
 
     //post request with newBill
+    var token = $cookies.get('authToken');
+    console.log(token);
+    $http({
+      url: SERVER.URL + 'bills',
+      method: 'POST',
+      headers: {
+        auth_token: token
+      }
+    }).then(function (res) {
+      console.log(res);
+    });
   };
 };
 
-AddBillController.$inject = ['$scope', '$stateParams', 'sweet', '$state'];
+AddBillController.$inject = ['$scope', '$stateParams', 'sweet', '$state', 'SERVER', '$http', '$cookies'];
 
 exports['default'] = AddBillController;
 module.exports = exports['default'];
