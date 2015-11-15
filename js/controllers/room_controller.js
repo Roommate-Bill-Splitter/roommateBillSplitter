@@ -1,6 +1,8 @@
 let RoomController = function($scope, RoomService, $state, $cookies, SERVER, $http){
   console.log("test");
 
+
+
  let token = $cookies.get('authToken');
   //Get a list of all the roommates
   // RoomService.getRoommates().then( (res) => {
@@ -16,9 +18,9 @@ let RoomController = function($scope, RoomService, $state, $cookies, SERVER, $ht
         auth_token: token
       }
   }).then((res)=>{
+    $scope.roommates = res.data.roommate;
     
-    
-    console.log(res);
+    console.log(res.data.roommate);
     
   })
 
@@ -28,13 +30,7 @@ let RoomController = function($scope, RoomService, $state, $cookies, SERVER, $ht
     $state.go('root.roomBills');
   };
 
-  //Delete a roommate
-  $scope.deleteRoom = function() {
-    console.log('Deleted');
-    RoomService.deleteRoommate().then( (res) => {
-      console.log(res);
-    })
-  };
+  
   //Go to the edit roommate page
   $scope.editRoomPage = function() {
     // console.log('Edited');

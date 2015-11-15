@@ -39,13 +39,15 @@ let AddRoomController = function($scope, RoomService, $state, sweet, $cookies, $
       data:{
         name: mate.name,
         email: mate.email,
-        phone: mate.phone
+        phone: mate.phone,
+        user_id: 17
         
       } //data
 
      })//$http
         .then((res)=>{
       console.log(res);
+      $scope.roommates = res.data.roommate;
     })
   }; 
 

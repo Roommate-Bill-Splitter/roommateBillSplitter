@@ -41,11 +41,11 @@ var config = function config($stateProvider, $urlRouterProvider, $httpProvider) 
     controller: 'EditBillController',
     templateUrl: 'templates/editBill.tpl.html'
   }).state('root.roommates', {
-    url: '/roommates/:id',
+    url: '/roommates',
     controller: 'RoomController',
     templateUrl: 'templates/room.tpl.html'
   }).state('root.roomBills', {
-    url: '/roommates/:id/:name/bills',
+    url: '/roommates/:id',
     controller: 'RoomBillController',
     templateUrl: 'templates/roomBill.tpl.html'
   }).state('root.addRoommate', {
@@ -170,13 +170,15 @@ var AddRoomController = function AddRoomController($scope, RoomService, $state, 
       data: {
         name: mate.name,
         email: mate.email,
-        phone: mate.phone
+        phone: mate.phone,
+        user_id: 17
 
       } //data
 
     }) //$http
     .then(function (res) {
       console.log(res);
+      $scope.roommates = res.data.roommate;
     });
   };
 
@@ -486,14 +488,36 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var RoomBillController = function RoomBillController($scope, RoomService, $state) {
+var RoomBillController = function RoomBillController($scope, RoomService, $state, $cookies, $http, SERVER) {
 
   $scope.goBack = function () {
     $state.go('root.roommates');
   };
+
+  //Delete a roommate
+  // $scope.deleteRoom = function() {
+  //   console.log('Deleted');
+  //   RoomService.deleteRoommate().then( (res) => {
+  //     console.log(res);
+  //   })
+  // };
+  $scope.deleteRoom = function () {
+    var token = $cookies.get('authToken');
+
+    $http({
+      url: SERVER.URL + 'roommates',
+      method: 'DELETE',
+      headers: {
+        auth_token: token
+      }
+    }).then(function (res) {
+
+      console.log(res);
+    });
+  };
 };
 
-RoomBillController.$inject = ['$scope', 'RoomService', '$state'];
+RoomBillController.$inject = ['$scope', 'RoomService', '$state', '$cookies', '$http', 'SERVER'];
 
 exports['default'] = RoomBillController;
 module.exports = exports['default'];
@@ -522,8 +546,9 @@ var RoomController = function RoomController($scope, RoomService, $state, $cooki
       auth_token: token
     }
   }).then(function (res) {
+    $scope.roommates = res.data.roommate;
 
-    console.log(res);
+    console.log(res.data.roommate);
   });
 
   //Go to view a single roommate
@@ -532,13 +557,6 @@ var RoomController = function RoomController($scope, RoomService, $state, $cooki
     $state.go('root.roomBills');
   };
 
-  //Delete a roommate
-  $scope.deleteRoom = function () {
-    console.log('Deleted');
-    RoomService.deleteRoommate().then(function (res) {
-      console.log(res);
-    });
-  };
   //Go to the edit roommate page
   $scope.editRoomPage = function () {
     // console.log('Edited');
