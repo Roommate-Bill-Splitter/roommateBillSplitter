@@ -373,6 +373,7 @@ var EditRoomController = function EditRoomController($scope, RoomService, $state
   var token = $cookies.get('authToken');
   var id = $cookies.get('user_id');
   var roommateId = $stateParams.id;
+  console.log(roommateId);
 
   //GET
   $http({

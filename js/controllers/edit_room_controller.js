@@ -4,6 +4,7 @@ let EditRoomController = function($scope, RoomService, $state, $stateParams, $co
   let token = $cookies.get('authToken');
   let id = $cookies.get('user_id');
   let roommateId = $stateParams.id;
+  console.log(roommateId);
 
 
   //GET
