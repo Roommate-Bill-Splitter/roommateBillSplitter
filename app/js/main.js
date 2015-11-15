@@ -27,14 +27,14 @@ var config = function config($stateProvider, $urlRouterProvider, $httpProvider) 
     url: '/bills',
     controller: 'BillsController',
     templateUrl: 'templates/bills.tpl.html'
-  }).state('root.indBill', {
-    url: '/bills/:id',
-    controller: 'IndBillController',
-    templateUrl: 'templates/indBill.tpl.html'
   }).state('root.addBill', {
     url: '/bills/add',
     controller: 'AddBillController',
     templateUrl: 'templates/addBill.tpl.html'
+  }).state('root.indBill', {
+    url: '/bills/:id',
+    controller: 'IndBillController',
+    templateUrl: 'templates/indBill.tpl.html'
   }).state('root.editBill', {
     url: '/bills/:id/edit',
     controller: 'EditBillController',
@@ -80,17 +80,17 @@ var AddBillController = function AddBillController($scope, $stateParams, sweet, 
   $scope.newBill = {};
 
   function Bill(obj) {
-    this.name = obj.name;
+    this.title = obj.title;
     this.amount = obj.amount;
-    this.due = obj.due;
+    this.due_date = obj.due_date;
   }
 
   $scope.addBill = function (bill) {
     var x = new Bill(bill);
     $scope.newBill = {
-      name: x.name,
+      title: x.title,
       amount: x.amount,
-      due: x.due
+      due_date: x.due_date
     };
     console.log($scope.newBill);
     sweet.show({
@@ -109,6 +109,11 @@ var AddBillController = function AddBillController($scope, $stateParams, sweet, 
       method: 'POST',
       headers: {
         auth_token: token
+      },
+      data: {
+        title: $scope.newBill.title,
+        amount: $scope.newBill.amount,
+        due_date: $scope.newBill.due_date
       }
     }).then(function (res) {
       console.log(res);
@@ -170,8 +175,9 @@ var BillsController = function BillsController($scope, $http, $cookies, SERVER, 
       auth_token: token
     }
   }).then(function (res) {
-    console.log(res);
+
     $scope.roomList = res.data.bill;
+    console.log($scope.roomList);
   });
 };
 

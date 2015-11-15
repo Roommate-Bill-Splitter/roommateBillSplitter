@@ -27,15 +27,15 @@ let config= function($stateProvider, $urlRouterProvider, $httpProvider){
       controller: 'BillsController',
       templateUrl: 'templates/bills.tpl.html'
     })
-    .state('root.indBill',{
-      url: '/bills/:id',   
-      controller: 'IndBillController',
-      templateUrl: 'templates/indBill.tpl.html'
-    })
     .state('root.addBill',{
       url: '/bills/add',
       controller: 'AddBillController',
       templateUrl: 'templates/addBill.tpl.html'
+    })
+    .state('root.indBill',{
+      url: '/bills/:id',   
+      controller: 'IndBillController',
+      templateUrl: 'templates/indBill.tpl.html'
     })
     .state('root.editBill',{
       url: '/bills/:id/edit',
