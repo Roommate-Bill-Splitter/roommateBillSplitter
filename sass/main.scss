@@ -22,6 +22,7 @@ li{
 
 //Styles Buttons
 .siteButtons {
+  box-shadow: 5px 5px 5px;
  
 }
 //---------------------------------------
@@ -124,7 +125,12 @@ li{
   width: 400px;
   height: 200px;
   margin: 5%;
-  background-color: pink;
+  float: left;
+  padding: 3%;
+  border: 3px black;
+  border-radius: 3px;
+  box-shadow: 5px 5px 5px;
+  background-color: white;
 }
 //div wrapping the add btn / go back btn
 .addGoBack {
