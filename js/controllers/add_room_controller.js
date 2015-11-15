@@ -3,6 +3,7 @@ let AddRoomController = function($scope, RoomService, $state, sweet){
  
   $scope.addRoommate = (obj) => {
     console.log(obj);
+    // let token = $cookies.get('authToken');
     RoomService.addRoommate(obj).then( (res) => {
    
       

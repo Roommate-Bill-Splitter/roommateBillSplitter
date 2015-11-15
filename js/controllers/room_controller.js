@@ -1,4 +1,5 @@
 let RoomController = function($scope, RoomService, $state){
+  console.log("test");
 
 
   //Get a list of all the roommates
