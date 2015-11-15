@@ -37,7 +37,6 @@ let UserService = function($http, SERVER, $cookies, $state) {
     
   };
 
-
   this.logout = function (){
     $cookies.remove('authToken');
     SERVER.CONFIG.headers['X-AUTH-TOKEN'] = null;
