@@ -105,6 +105,8 @@ var AddBillController = function AddBillController($scope, $stateParams, sweet, 
 
     //post request with newBill
     var token = $cookies.get('authToken');
+    var id = $cookies.get('user_id');
+    console.log(id, token);
     $http({
       url: SERVER.URL + 'bill',
       method: 'POST',
@@ -114,7 +116,8 @@ var AddBillController = function AddBillController($scope, $stateParams, sweet, 
       data: {
         title: $scope.newBill.title,
         amount: $scope.newBill.amount,
-        due_date: $scope.newBill.due_date
+        due_date: $scope.newBill.due_date,
+        user_id: id
       }
     }).then(function (res) {
       console.log(res);
@@ -201,6 +204,7 @@ Object.defineProperty(exports, '__esModule', {
 var BillsController = function BillsController($scope, $http, $cookies, SERVER, sweet) {
 
   var token = $cookies.get('authToken');
+  var id = $cookies.get('user_id');
 
   $http({
     url: SERVER.URL + 'bill',
@@ -312,6 +316,8 @@ var _jquery2 = _interopRequireDefault(_jquery);
 var EditBillController = function EditBillController($scope, sweet, $state, $http, SERVER, $cookies, $stateParams) {
 
   var token = $cookies.get('authToken');
+  var id = $cookies.get('user_id');
+  console.log(id);
   var thisBill = $stateParams.id;
 
   $http({
@@ -333,20 +339,18 @@ var EditBillController = function EditBillController($scope, sweet, $state, $htt
     this.title = obj.title;
     this.amount = obj.amount;
     this.due_date = obj.due_date;
-    this.user_id = obj.user_id;
   }
   $scope.editedBill = {};
   $scope.editBill = function (results) {
     //put request
     var x = new Bill(results);
     $scope.editedBill = {
-      user_id: x.user_id,
       title: x.title,
       amount: x.amount,
       due_date: x.due_date
 
     };
-    console.log($scope.editedBill);
+    console.log(token);
 
     $http({
       url: SERVER.URL + 'bill/' + thisBill,
@@ -355,10 +359,10 @@ var EditBillController = function EditBillController($scope, sweet, $state, $htt
         auth_token: token
       },
       data: {
+        user_id: id,
         title: $scope.editedBill.title,
-        due_date: $scope.editedBill.due_date,
-        user_id: $scope.editedBill.user_id,
-        amount: $scope.editedBill.amount
+        amount: $scope.editedBill.amount,
+        due_date: $scope.editedBill.due_date
       }
     }).then(function (res) {
 
@@ -370,7 +374,7 @@ var EditBillController = function EditBillController($scope, sweet, $state, $htt
       confirmButtonText: "Aight"
 
     }, function () {
-      // $state.go('root.bills')
+      $state.go('root.bills');
     });
   };
 };
@@ -420,10 +424,9 @@ var HomeController = function HomeController($scope, UserService, $cookies, $sta
 
   $scope.create = function (user) {
 
-    UserService.create(user).then(function (res) {
-      console.log(res);
-      $state.go('root.dashboard');
-    });
+    UserService.create(user);
+
+    // $state.go('root.dashboard');
   };
 
   $scope.login = function (user) {
@@ -545,10 +548,9 @@ var RoomController = function RoomController($scope, RoomService, $state, $cooki
 
   var token = $cookies.get('authToken');
   //Get a list of all the roommates
-  // RoomService.getRoommates().then( (res) => {
-  //   console.log(res);
-  //   $scope.roommates = (res.data);
-  // })
+
+  RoomService.getRoommates();
+
   //------------------------------------------------
 
   $http({
@@ -765,13 +767,15 @@ var RoomService = function RoomService($http, SERVER, $cookies) {
   this.getRoommates = function () {
     var token = $cookies.get('authToken');
 
-    return $http({
-      url: SERVER.URL + 'roommates',
+    $http({
+      url: url + 'roommates',
       method: 'GET',
       headers: {
         auth_token: token
       },
       data: {}
+    }).then(function (res) {
+      console.log(res);
     });
   };
 
@@ -850,14 +854,11 @@ var UserService = function UserService($http, SERVER, $cookies, $state, sweet) {
   this.checkAuth = function () {
 
     var token = $cookies.get('authToken');
+    var id = $cookies.get('user_id');
 
-    if (!token) {
-      sweet.show({
-        title: 'You are not logged in',
-        text: "What's up with that?",
-        confirmButtonText: "K"
-      });
-      $state.go('root.home');
+    if (token) {
+
+      $state.go('root.dashboard');
     }
   };
 
@@ -873,13 +874,20 @@ var UserService = function UserService($http, SERVER, $cookies, $state, sweet) {
 
     var u = new user(obj);
 
-    return $http.post(SERVER.URL + 'signup', u);
+    return $http.post(SERVER.URL + 'signup', u).then(function (res) {
+      console.log(res);
+      $cookies.put('authToken', res.data.user.auth_token);
+      $cookies.put('user_id', res.data.user.id);
+      SERVER.CONFIG.headers['X-AUTH-TOKEN'] = res.data.user.auth_token;
+      $state.go('root.dashboard');
+    });
   };
 
   this.sendLogin = function (userObj) {
     $http.post(SERVER.URL + 'login', userObj, SERVER.CONFIG).then(function (res) {
       console.log(res);
       $cookies.put('authToken', res.data.user.auth_token);
+      $cookies.put('user_id', res.data.user.id);
       SERVER.CONFIG.headers['X-AUTH-TOKEN'] = res.data.user.auth_token;
       $state.go('root.dashboard');
     });

@@ -29,6 +29,8 @@ let AddBillController = function($scope, $stateParams, sweet, $state, SERVER, $h
     
     //post request with newBill
     let token = $cookies.get('authToken');
+    let id = $cookies.get('user_id');
+    console.log(id, token);
     $http({
       url: SERVER.URL + 'bill',
       method: 'POST',
@@ -38,7 +40,8 @@ let AddBillController = function($scope, $stateParams, sweet, $state, SERVER, $h
       data:{
         title: $scope.newBill.title,
         amount: $scope.newBill.amount,
-        due_date: $scope.newBill.due_date
+        due_date: $scope.newBill.due_date,
+        user_id: id
       }
     }).then((res)=>{
       console.log(res);
