@@ -13,6 +13,8 @@ li{
   list-style: none;
 }
 
+
+
 .formWrapper {
   width: 40%;
   margin: 0 auto; 
@@ -43,6 +45,7 @@ li{
   height: 600px;
   width: 80%;
   margin: 0 auto;
+  margin-top: 1.5%;
 }
   .group{
     width: 90%;
@@ -59,7 +62,7 @@ li{
     .log {
       width: 30%;
       float: left;
-      margin:  5% 7%;
+      margin:  5% 12%;
 
   }
 
@@ -111,10 +114,29 @@ li{
 
 
 .chart {
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
   text-align: center; 
+
+  h3 {
+    padding-top: 1%;
+  }
+
+  table {
+    width: 55%;
+    margin: 0 auto;
+    text-align: center;
+
+    .chart-bill {
+      a {
+        color: #666666;
+      }
+    } 
+  }
+
 }
+
+
 
 
 
@@ -171,7 +193,11 @@ li{
 .board{
   margin-left: 40%;
   margin-top: 3%;
+  
+
+ 
 }
+
 .move{
   color: white;
   text-shadow:  2px  2px black;

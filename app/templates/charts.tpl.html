@@ -1,28 +1,27 @@
 <div class="chart">
 
-  <h2>{{title}}</h2>
+  <h3>{{title}}</h3>
 
   <table >
     <tbody>
-      <tr>
-        <th width="200">Name</th>
-        <th width="100">Bill</th>
-        <th width="100">Bill</th>
-        <th width="100">Bill</th>
-        <th width="100">Bill</th>
-        <th width="100">Bill</th>
-        <th width="100">Amount Due</th>
+      <tr class="chart-header">
+        <th width="50">Bill</th>
+        <th width="25">ID</th>
+        <th width="25">Due Date</th>
+        <th width="25">Amount</th>
       </tr>
 
-      <tr ng-repeat="roommate in roommates">
-        <td>{{ roommate.name }}</td>
-        <td>{{ roommate.bill }}</td>
-        <td>{{ roommate.bill }}</td>
-        <td>{{ roommate.bill }}</td>
-        <td>{{ roommate.bill }}</td>
-        <td>{{ roommate.bill }}</td>
-        <td>{{ roommate.bill }}</td>
+      <!-- <tr ng-repeat="roommate in roommates">
+        <td><a href="#/roommate/{{ roommates.id }}">{{ roommates.name }}</a></td> 
+      </tr> -->
+
+      <tr class="chart-bill" ng-repeat="bill in bills">
+        <td><a href="#">{{ bill.title }}</a></td> 
+        <td><a href="#">{{ bill.bill_id }}</a></td> 
+        <td><a href="#">{{ bill.due_date }}</a></td> 
+        <td><a href="#">{{ bill.amount }}</a></td> 
       </tr>
+
     </tbody>
   </table>
 

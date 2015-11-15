@@ -7408,7 +7408,8 @@ li {
     background-size: 100%;
     height: 600px;
     width: 80%;
-    margin: 0 auto; }
+    margin: 0 auto;
+    margin-top: 1.5%; }
   .homeWrapper .group {
     width: 90%; }
     .homeWrapper .group .signup {
@@ -7421,7 +7422,7 @@ li {
     .homeWrapper .group .log {
       width: 30%;
       float: left;
-      margin: 5% 7%; }
+      margin: 5% 12%; }
   .homeWrapper .signup {
     float: right; }
   .homeWrapper .log {
@@ -7452,9 +7453,17 @@ li {
     border-radius: 10%; }
 
 .chart {
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
   text-align: center; }
+  .chart h3 {
+    padding-top: 1%; }
+  .chart table {
+    width: 55%;
+    margin: 0 auto;
+    text-align: center; }
+    .chart table .chart-bill a {
+      color: #666666; }
 
 .roomWrapper {
   width: 400px;

@@ -1,17 +1,28 @@
 let ChartService = function($http, SERVER) {
 
-  // let url = SERVER.URL + 'classes/';
+  let url1 = SERVER.URL + 'bill';
+  let url2 = SERVER.URL + 'roommates';
 
 
-  this.getRoommates = function () {
-    // return $http({
-    //   url: url,
-    //   headers: SERVER.CONFIG.header,
-    //   method: 'GET',
-    //   cache: true
-    // });
-
+  this.getBills = function () {
+    return $http({
+      url: url,
+      headers: SERVER.CONFIG.headers,
+      method: 'GET',
+      cache: true
+    })
   };
+
+this.getRoommates = function () {
+    return $http({
+      url2: url2,
+      headers: SERVER.CONFIG.headers,
+      method: 'GET',
+      cache: true
+    })
+  };
+
+
 
 };
 
