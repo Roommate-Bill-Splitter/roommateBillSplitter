@@ -5,17 +5,17 @@ let AddBillController = function($scope, $stateParams, sweet, $state, SERVER, $h
   $scope.newBill={};
 
   function Bill (obj){
-    this.name = obj.name;
+    this.title = obj.title;
     this.amount=obj.amount;
-    this.due= obj.due;
+    this.due_date= obj.due_date;
   }
 
   $scope.addBill = function (bill) {
     let x = new Bill(bill);
     $scope.newBill = {
-      name: x.name,
+      title: x.title,
       amount: x.amount,
-      due: x.due
+      due_date: x.due_date
     };
     console.log($scope.newBill);
     sweet.show({
@@ -29,12 +29,16 @@ let AddBillController = function($scope, $stateParams, sweet, $state, SERVER, $h
     
     //post request with newBill
     let token = $cookies.get('authToken');
-    console.log(token);
     $http({
-      url: SERVER.URL + 'bills',
+      url: SERVER.URL + 'bill',
       method: 'POST',
       headers:{
         auth_token: token
+      },
+      data:{
+        title: $scope.newBill.title,
+        amount: $scope.newBill.amount,
+        due_date: $scope.newBill.due_date
       }
     }).then((res)=>{
       console.log(res);

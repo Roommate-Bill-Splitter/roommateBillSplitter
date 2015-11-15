@@ -20,7 +20,7 @@ let RoomService = function($http, SERVER, $cookies) {
   this.getRoommate = function(id) {
       let token = $cookies.get('authToken');
       return $http({
-      url: url + 'roommates' + id,
+      url: url + 'roommates/' + id,
       method: 'GET',
       headers:{
         auth_token: token
@@ -58,7 +58,7 @@ let RoomService = function($http, SERVER, $cookies) {
   //Delete a roommate
   this.deleteRoommate = function(id) {
       return $http({
-      url: url + 'roommates' + id,
+      url: url + 'roommates/' + id,
       method: 'DELETE',
       headers:{
         auth_token: token
