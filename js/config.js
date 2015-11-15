@@ -5,6 +5,7 @@ let config= function($stateProvider, $urlRouterProvider, $httpProvider){
   $stateProvider
     .state('root', {
       abstract: true,
+      controller: 'LayoutController',
       templateUrl: 'templates/layout.tpl.html'
     })
     .state('root.home', {

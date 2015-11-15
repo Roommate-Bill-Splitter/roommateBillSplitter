@@ -10,6 +10,7 @@ var config = function config($stateProvider, $urlRouterProvider, $httpProvider) 
   // delete $httpProvider.defaults.headers.common['X-Requested-With'];
   $stateProvider.state('root', {
     abstract: true,
+    controller: 'LayoutController',
     templateUrl: 'templates/layout.tpl.html'
   }).state('root.home', {
     url: '/',
@@ -126,7 +127,7 @@ AddBillController.$inject = ['$scope', '$stateParams', 'sweet', '$state', 'SERVE
 exports['default'] = AddBillController;
 module.exports = exports['default'];
 
-},{"jquery":24}],3:[function(require,module,exports){
+},{"jquery":25}],3:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -135,16 +136,12 @@ Object.defineProperty(exports, '__esModule', {
 var AddRoomController = function AddRoomController($scope, RoomService, $state, sweet) {
 
   $scope.addRoommate = function (obj) {
+    console.log(obj);
+    // let token = $cookies.get('authToken');
     RoomService.addRoommate(obj).then(function (res) {
 
-      sweet.show({
-        title: 'Roommate Added!',
-        text: 'Congrats.',
-        confirmButtonText: "K cool"
-      }, function () {
-        $state.go('root.roommates');
-        $scope.roomate = {};
-      });
+      $state.go('root.roommates');
+      $scope.roomate = {};
     }); //RoomService
   };
 
@@ -310,7 +307,7 @@ EditBillController.$inject = ['$scope', 'sweet', '$state', '$http', 'SERVER', '$
 exports['default'] = EditBillController;
 module.exports = exports['default'];
 
-},{"jquery":24}],8:[function(require,module,exports){
+},{"jquery":25}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -432,6 +429,26 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
+var LayoutController = function LayoutController($scope, $http, $cookies, SERVER, sweet, $state) {
+
+  $scope.logMeOut = function () {
+    $cookies.remove('authToken');
+    SERVER.CONFIG.headers['X-AUTH-TOKEN'] = null;
+    $state.go('root.home');
+  };
+};
+
+LayoutController.$inject = ['$scope', '$http', '$cookies', 'SERVER', 'sweet', '$state'];
+
+exports['default'] = LayoutController;
+module.exports = exports['default'];
+
+},{}],12:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
 var RoomBillController = function RoomBillController($scope, RoomService, $state) {
 
   $scope.goBack = function () {
@@ -444,16 +461,18 @@ RoomBillController.$inject = ['$scope', 'RoomService', '$state'];
 exports['default'] = RoomBillController;
 module.exports = exports['default'];
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
 var RoomController = function RoomController($scope, RoomService, $state) {
+  console.log("test");
 
   //Get a list of all the roommates
   RoomService.getRoommates().then(function (res) {
+    console.log(res);
     $scope.roommates = res.data;
   });
 
@@ -477,7 +496,6 @@ var RoomController = function RoomController($scope, RoomService, $state) {
   };
   //Go to the add a roommate page
   $scope.addRoomPage = function () {
-    // console.log('Added');
     $state.go('root.addRoommate');
   };
   //Go back to the dashboard
@@ -491,7 +509,7 @@ RoomController.$inject = ['$scope', 'RoomService', '$state'];
 exports['default'] = RoomController;
 module.exports = exports['default'];
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -570,6 +588,10 @@ var _controllersEdit_room_controller = require('./controllers/edit_room_controll
 
 var _controllersEdit_room_controller2 = _interopRequireDefault(_controllersEdit_room_controller);
 
+var _controllersLayout_controller = require('./controllers/layout_controller');
+
+var _controllersLayout_controller2 = _interopRequireDefault(_controllersLayout_controller);
+
 //Services
 
 var _servicesRoom_service = require('./services/room_service');
@@ -593,9 +615,9 @@ _angular2['default'].module('app', ['ui.router', 'ngCookies', 'hSweetAlert']).co
   CONFIG: {
     headers: {}
   }
-}).config(_config2['default']).controller('HomeController', _controllersHome_controller2['default']).controller('DashController', _controllersDash_controller2['default']).controller('ChartController', _controllersChart_controller2['default']).controller('BillsController', _controllersBills_controller2['default']).controller('IndBillController', _controllersInd_bill_controller2['default']).controller('AddBillController', _controllersAdd_bill_controller2['default']).controller('EditBillController', _controllersEdit_bill_controller2['default']).controller('RoomController', _controllersRoom_controller2['default']).controller('RoomBillController', _controllersRoom_bill_controller2['default']).controller('AddRoomController', _controllersAdd_room_controller2['default']).controller('EditRoomController', _controllersEdit_room_controller2['default']).service('UserService', _servicesUser_service2['default']).service('RoomService', _servicesRoom_service2['default']).service('ChartService', _servicesChart_service2['default']).service('BillService', _servicesBill_service2['default']);
+}).config(_config2['default']).controller('HomeController', _controllersHome_controller2['default']).controller('DashController', _controllersDash_controller2['default']).controller('ChartController', _controllersChart_controller2['default']).controller('BillsController', _controllersBills_controller2['default']).controller('IndBillController', _controllersInd_bill_controller2['default']).controller('AddBillController', _controllersAdd_bill_controller2['default']).controller('EditBillController', _controllersEdit_bill_controller2['default']).controller('RoomController', _controllersRoom_controller2['default']).controller('RoomBillController', _controllersRoom_bill_controller2['default']).controller('AddRoomController', _controllersAdd_room_controller2['default']).controller('EditRoomController', _controllersEdit_room_controller2['default']).controller('LayoutController', _controllersLayout_controller2['default']).service('UserService', _servicesUser_service2['default']).service('RoomService', _servicesRoom_service2['default']).service('ChartService', _servicesChart_service2['default']).service('BillService', _servicesBill_service2['default']);
 
-},{"./config":1,"./controllers/add_bill_controller":2,"./controllers/add_room_controller":3,"./controllers/bills_controller":4,"./controllers/chart_controller":5,"./controllers/dash_controller":6,"./controllers/edit_bill_controller":7,"./controllers/edit_room_controller":8,"./controllers/home_controller":9,"./controllers/ind_bill_controller":10,"./controllers/room_bill_controller":11,"./controllers/room_controller":12,"./services/bill_service":14,"./services/chart_service":15,"./services/room_service":16,"./services/user_service":17,"angular":23,"angular-cookies":19,"angular-h-sweetalert":20,"angular-ui-router":21,"jquery":24,"moment":25,"sweetalert":34,"underscore":35}],14:[function(require,module,exports){
+},{"./config":1,"./controllers/add_bill_controller":2,"./controllers/add_room_controller":3,"./controllers/bills_controller":4,"./controllers/chart_controller":5,"./controllers/dash_controller":6,"./controllers/edit_bill_controller":7,"./controllers/edit_room_controller":8,"./controllers/home_controller":9,"./controllers/ind_bill_controller":10,"./controllers/layout_controller":11,"./controllers/room_bill_controller":12,"./controllers/room_controller":13,"./services/bill_service":15,"./services/chart_service":16,"./services/room_service":17,"./services/user_service":18,"angular":24,"angular-cookies":20,"angular-h-sweetalert":21,"angular-ui-router":22,"jquery":25,"moment":26,"sweetalert":35,"underscore":36}],15:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -608,7 +630,7 @@ BillService.$inject = ['$http'];
 exports['default'] = BillService;
 module.exports = exports['default'];
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -633,32 +655,38 @@ ChartService.$inject = ['$http', 'SERVER'];
 exports['default'] = ChartService;
 module.exports = exports['default'];
 
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var RoomService = function RoomService($http, SERVER) {
+var RoomService = function RoomService($http, SERVER, $cookies) {
 
   var url = SERVER.URL;
 
   //Display a list of all roommates
   this.getRoommates = function () {
+    var token = $cookies.get('authToken');
+
     return $http({
-      url: url,
-      headers: SERVER.CONFIG.headers,
-      method: 'GET'
+      url: url + 'roommates',
+      method: 'GET',
+      headers: {
+        auth_token: token
+      }
     });
   };
 
   //Display a single roommate
   this.getRoommate = function (id) {
+    var token = $cookies.get('authToken');
     return $http({
-      url: url + '/' + id,
-      headers: SERVER.CONFIG.headers,
-      method: 'GET'
-
+      url: url + 'roommates/' + id,
+      method: 'GET',
+      headers: {
+        auth_token: token
+      }
     });
   };
 
@@ -667,43 +695,70 @@ var RoomService = function RoomService($http, SERVER) {
     this.name = obj.name;
     this.email = obj.email;
     this.phone = obj.phone;
-    this.house_id = obj.house_id;
+    this.user_id = obj.user_id;
   };
 
   this.addRoommate = function (obj) {
+
     var mate = new Roommate(obj);
+    console.log(mate);
+    var token = $cookies.get('authToken');
+    console.log(token);
+
+    return $http({
+      url: url + 'roommates',
+      method: 'POST',
+      headers: {
+        auth_token: token
+      }
+    });
   };
 
   //Delete a roommate
-  this.deleteRoommate = function (obj) {
-    return 'deleted from service';
+  this.deleteRoommate = function (id) {
+    return $http({
+      url: url + 'roommates/' + id,
+      method: 'DELETE',
+      headers: {
+        auth_token: token
+      }
+    });
   };
   //Edit a roommate
-  this.editRoommate = function (obj) {
-    return $http.put(url + '/' + obj.id, obj, SERVER.CONFIG);
+  this.editRoommate = function (id) {
+    return $http({
+      url: url + 'roommates/' + id,
+      method: 'PUT',
+      headers: {
+        auth_token: token
+      }
+    });
   };
 };
 
-RoomService.$inject = ['$http', 'SERVER'];
+RoomService.$inject = ['$http', 'SERVER', '$cookies'];
 
 exports['default'] = RoomService;
 module.exports = exports['default'];
 
-},{}],17:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var UserService = function UserService($http, SERVER, $cookies, $state) {
+var UserService = function UserService($http, SERVER, $cookies, $state, sweet) {
 
   this.checkAuth = function () {
 
     var token = $cookies.get('authToken');
 
-    if (token) {
-      return $http.get(SERVER.URL, SERVER.CONFIG);
-    } else {
+    if (!token) {
+      sweet.show({
+        title: 'You are not logged in',
+        text: "What's up with that?",
+        confirmButtonText: "K"
+      });
       $state.go('root.home');
     }
   };
@@ -739,12 +794,12 @@ var UserService = function UserService($http, SERVER, $cookies, $state) {
   };
 };
 
-UserService.$inject = ['$http', 'SERVER', '$cookies', '$state'];
+UserService.$inject = ['$http', 'SERVER', '$cookies', '$state', 'sweet'];
 
 exports['default'] = UserService;
 module.exports = exports['default'];
 
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 /**
  * @license AngularJS v1.4.7
  * (c) 2010-2015 Google, Inc. http://angularjs.org
@@ -1067,11 +1122,11 @@ angular.module('ngCookies').provider('$$cookieWriter', function $$CookieWriterPr
 
 })(window, window.angular);
 
-},{}],19:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 require('./angular-cookies');
 module.exports = 'ngCookies';
 
-},{"./angular-cookies":18}],20:[function(require,module,exports){
+},{"./angular-cookies":19}],21:[function(require,module,exports){
 /**
  * angular-h-sweetalert is a simple wrapper of sweetalert.
  *
@@ -1129,7 +1184,7 @@ module.exports = 'ngCookies';
 
 }(angular, window));
 
-},{"sweetalert":34}],21:[function(require,module,exports){
+},{"sweetalert":35}],22:[function(require,module,exports){
 /**
  * State-based routing for AngularJS
  * @version v0.2.15
@@ -5500,7 +5555,7 @@ angular.module('ui.router.state')
   .filter('isState', $IsStateFilter)
   .filter('includedByState', $IncludedByStateFilter);
 })(window, window.angular);
-},{}],22:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 /**
  * @license AngularJS v1.4.7
  * (c) 2010-2015 Google, Inc. http://angularjs.org
@@ -34405,11 +34460,11 @@ $provide.value("$locale", {
 })(window, document);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],23:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":22}],24:[function(require,module,exports){
+},{"./angular":23}],25:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
@@ -43621,7 +43676,7 @@ return jQuery;
 
 }));
 
-},{}],25:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 //! moment.js
 //! version : 2.10.6
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -46817,7 +46872,7 @@ return jQuery;
     return _moment;
 
 }));
-},{}],26:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -46850,7 +46905,7 @@ var defaultParams = {
 
 exports['default'] = defaultParams;
 module.exports = exports['default'];
-},{}],27:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -46986,7 +47041,7 @@ exports['default'] = {
   handleCancel: handleCancel
 };
 module.exports = exports['default'];
-},{"./handle-dom":28,"./handle-swal-dom":30,"./utils":33}],28:[function(require,module,exports){
+},{"./handle-dom":29,"./handle-swal-dom":31,"./utils":34}],29:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -47178,7 +47233,7 @@ exports.fadeIn = fadeIn;
 exports.fadeOut = fadeOut;
 exports.fireClick = fireClick;
 exports.stopEventPropagation = stopEventPropagation;
-},{}],29:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -47258,7 +47313,7 @@ var handleKeyDown = function handleKeyDown(event, params, modal) {
 
 exports['default'] = handleKeyDown;
 module.exports = exports['default'];
-},{"./handle-dom":28,"./handle-swal-dom":30}],30:[function(require,module,exports){
+},{"./handle-dom":29,"./handle-swal-dom":31}],31:[function(require,module,exports){
 'use strict';
 
 var _interopRequireWildcard = function (obj) { return obj && obj.__esModule ? obj : { 'default': obj }; };
@@ -47426,7 +47481,7 @@ exports.openModal = openModal;
 exports.resetInput = resetInput;
 exports.resetInputError = resetInputError;
 exports.fixVerticalPosition = fixVerticalPosition;
-},{"./default-params":26,"./handle-dom":28,"./injected-html":31,"./utils":33}],31:[function(require,module,exports){
+},{"./default-params":27,"./handle-dom":29,"./injected-html":32,"./utils":34}],32:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -47469,7 +47524,7 @@ var injectedHTML =
 
 exports["default"] = injectedHTML;
 module.exports = exports["default"];
-},{}],32:[function(require,module,exports){
+},{}],33:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -47695,7 +47750,7 @@ var setParameters = function setParameters(params) {
 
 exports['default'] = setParameters;
 module.exports = exports['default'];
-},{"./handle-dom":28,"./handle-swal-dom":30,"./utils":33}],33:[function(require,module,exports){
+},{"./handle-dom":29,"./handle-swal-dom":31,"./utils":34}],34:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -47769,7 +47824,7 @@ exports.hexToRgb = hexToRgb;
 exports.isIE8 = isIE8;
 exports.logStr = logStr;
 exports.colorLuminance = colorLuminance;
-},{}],34:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 'use strict';
 
 var _interopRequireWildcard = function (obj) { return obj && obj.__esModule ? obj : { 'default': obj }; };
@@ -48073,7 +48128,7 @@ if (typeof window !== 'undefined') {
   _extend$hexToRgb$isIE8$logStr$colorLuminance.logStr('SweetAlert is a frontend module!');
 }
 module.exports = exports['default'];
-},{"./modules/default-params":26,"./modules/handle-click":27,"./modules/handle-dom":28,"./modules/handle-key":29,"./modules/handle-swal-dom":30,"./modules/set-params":32,"./modules/utils":33}],35:[function(require,module,exports){
+},{"./modules/default-params":27,"./modules/handle-click":28,"./modules/handle-dom":29,"./modules/handle-key":30,"./modules/handle-swal-dom":31,"./modules/set-params":33,"./modules/utils":34}],36:[function(require,module,exports){
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -49623,7 +49678,7 @@ module.exports = exports['default'];
   }
 }.call(this));
 
-},{}]},{},[13])
+},{}]},{},[14])
 
 
 //# sourceMappingURL=main.js.map
