@@ -22,6 +22,7 @@ let AddRoomController = function($scope, RoomService, $state, sweet, $cookies, $
     this.phone = obj.phone;
    
   };
+let id = $cookies.get('user_id');
 
  $scope.addRoommate = function(obj) {
     let mate = new Roommate(obj);
@@ -40,7 +41,8 @@ let AddRoomController = function($scope, RoomService, $state, sweet, $cookies, $
         name: mate.name,
         email: mate.email,
         phone: mate.phone,
-        user_id: 17
+        user_id: id
+
         
       } //data
 

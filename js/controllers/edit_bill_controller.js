@@ -2,6 +2,8 @@ import $ from 'jquery';
 let EditBillController = function($scope, sweet, $state, $http, SERVER, $cookies, $stateParams){
   
   let token = $cookies.get('authToken')
+  let id = $cookies.get('user_id');
+  console.log(id);
   let thisBill= $stateParams.id;
 
   $http({
@@ -24,20 +26,18 @@ let EditBillController = function($scope, sweet, $state, $http, SERVER, $cookies
       this.title = obj.title;
       this.amount=obj.amount;
       this.due_date= obj.due_date;
-      this.user_id= obj.user_id;
   }
   $scope.editedBill={};
   $scope.editBill= function(results){
     //put request
     let x = new Bill(results);
     $scope.editedBill = {
-      user_id: x.user_id,
       title: x.title,
       amount: x.amount,
       due_date: x.due_date
 
     };
-    console.log($scope.editedBill);
+    console.log(token);
 
     $http({
       url: SERVER.URL + 'bill/' + thisBill,
@@ -46,10 +46,10 @@ let EditBillController = function($scope, sweet, $state, $http, SERVER, $cookies
           auth_token: token
         },
         data: {
+          user_id: id,
           title: $scope.editedBill.title,
-          due_date: $scope.editedBill.due_date,
-          user_id: $scope.editedBill.user_id,
-          amount: $scope.editedBill.amount
+          amount: $scope.editedBill.amount,
+          due_date: $scope.editedBill.due_date
         }
   }).then((res)=>{
     
@@ -62,7 +62,7 @@ let EditBillController = function($scope, sweet, $state, $http, SERVER, $cookies
           confirmButtonText: "Aight",
 
       }, function(){
-        // $state.go('root.bills')
+        $state.go('root.bills')
       });
 
   }
