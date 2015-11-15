@@ -156,6 +156,7 @@ var AddRoomController = function AddRoomController($scope, RoomService, $state, 
     this.email = obj.email;
     this.phone = obj.phone;
   };
+  var id = $cookies.get('user_id');
 
   $scope.addRoommate = function (obj) {
     var mate = new Roommate(obj);
@@ -173,7 +174,8 @@ var AddRoomController = function AddRoomController($scope, RoomService, $state, 
       data: {
         name: mate.name,
         email: mate.email,
-        phone: mate.phone
+        phone: mate.phone,
+        user_id: id
 
       } //data
 
@@ -216,16 +218,16 @@ var BillsController = function BillsController($scope, $http, $cookies, SERVER, 
 
     $scope.roomList = res.data.bill;
     console.log($scope.roomList);
+    var newList = [];
+    $scope.roomList.forEach(function (y) {
 
-    $scope.roomList.map(function (y) {
-      var newList = [];
       var id = $cookies.get('user_id');
       // console.log(id);
       if (y.user_id == id) {
         newList.push(y);
+        console.log(newList);
+        $scope.newList = newList;
       }
-      console.log(newList);
-      $scope.newList = newList;
     });
   });
 };
@@ -732,6 +734,8 @@ var RoomService = function RoomService($http, SERVER, $cookies) {
   //Display a list of all roommates
   this.getRoommates = function () {
     var token = $cookies.get('authToken');
+    var id = $cookies.get('user_id');
+    console.log(id);
 
     $http({
       url: url + 'roommates',
@@ -741,7 +745,8 @@ var RoomService = function RoomService($http, SERVER, $cookies) {
       },
       data: {}
     }).then(function (res) {
-      console.log(res);
+      // console.log(res);
+
     });
   };
 
@@ -771,14 +776,21 @@ var RoomService = function RoomService($http, SERVER, $cookies) {
     var mate = new Roommate(obj);
     console.log(mate);
     var token = $cookies.get('authToken');
-    console.log(token);
 
     return $http({
       url: url + 'roommates',
       method: 'POST',
       headers: {
         auth_token: token
+      },
+      data: {
+        name: mate.name,
+        email: mate.email,
+        phone: mate.phone,
+        user_id: id
       }
+    }).then(function (res) {
+      console.log(res);
     });
   };
 
