@@ -7432,9 +7432,13 @@ body {
   text-align: center; }
 
 .chart {
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
   text-align: center; }
+  .chart table {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center; }
 
 .roomWrapper {
   width: 400px;
