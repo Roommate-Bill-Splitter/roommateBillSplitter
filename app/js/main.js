@@ -136,24 +136,61 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var AddRoomController = function AddRoomController($scope, RoomService, $state, sweet) {
+var AddRoomController = function AddRoomController($scope, RoomService, $state, sweet, $cookies, $http, SERVER) {
+
+  // $scope.addRoommate = (obj) => {
+  //   console.log(obj);
+  //   // let token = $cookies.get('authToken');
+  //   RoomService.addRoommate(obj).then( (res) => {
+
+  //       $state.go('root.roommates')
+  //       $scope.roomate={};
+
+  //   });//RoomService
+  // }
+
+  //////////////TEST////////////////////
+  //Add a new roommate
+  var Roommate = function Roommate(obj) {
+    this.name = obj.name;
+    this.email = obj.email;
+    this.phone = obj.phone;
+  };
 
   $scope.addRoommate = function (obj) {
-    console.log(obj);
-    // let token = $cookies.get('authToken');
-    RoomService.addRoommate(obj).then(function (res) {
+    var mate = new Roommate(obj);
+    console.log(mate);
 
-      $state.go('root.roommates');
-      $scope.roomate = {};
-    }); //RoomService
+    //post request
+    var token = $cookies.get('authToken');
+    console.log(token);
+    $http({
+      url: SERVER.URL + 'roommates',
+      method: 'POST',
+      headers: {
+        auth_token: token
+      }, //headers
+      data: {
+        name: mate.name,
+        email: mate.email,
+        phone: mate.phone
+
+      } //data
+
+    }) //$http
+    .then(function (res) {
+      console.log(res);
+    });
   };
+
+  //////////////TEST////////////////////
 
   $scope.goBack = function () {
     $state.go('root.roommates');
   };
-};
+}; //AddRoomController
 
-AddRoomController.$inject = ['$scope', 'RoomService', '$state', 'sweet'];
+AddRoomController.$inject = ['$scope', 'RoomService', '$state', 'sweet', '$cookies', '$http', 'SERVER'];
 
 exports['default'] = AddRoomController;
 module.exports = exports['default'];
@@ -470,11 +507,26 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var RoomController = function RoomController($scope, RoomService, $state) {
+var RoomController = function RoomController($scope, RoomService, $state, $cookies, SERVER, $http) {
   console.log("test");
 
+  var token = $cookies.get('authToken');
   //Get a list of all the roommates
+
   RoomService.getRoommates();
+
+  //------------------------------------------------
+
+  $http({
+    url: SERVER.URL + 'roommates',
+    method: 'GET',
+    headers: {
+      auth_token: token
+    }
+  }).then(function (res) {
+
+    console.log(res);
+  });
 
   //Go to view a single roommate
   $scope.viewRoomPage = function () {
@@ -504,7 +556,7 @@ var RoomController = function RoomController($scope, RoomService, $state) {
   };
 };
 
-RoomController.$inject = ['$scope', 'RoomService', '$state'];
+RoomController.$inject = ['$scope', 'RoomService', '$state', '$cookies', 'SERVER', '$http'];
 
 exports['default'] = RoomController;
 module.exports = exports['default'];
@@ -675,7 +727,8 @@ var RoomService = function RoomService($http, SERVER, $cookies) {
       method: 'GET',
       headers: {
         auth_token: token
-      }
+      },
+      data: {}
     }).then(function (res) {
       console.log(res);
     });
@@ -689,7 +742,8 @@ var RoomService = function RoomService($http, SERVER, $cookies) {
       method: 'GET',
       headers: {
         auth_token: token
-      }
+      },
+      data: {}
     });
   };
 

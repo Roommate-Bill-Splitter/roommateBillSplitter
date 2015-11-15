@@ -6,11 +6,15 @@ let RoomService = function($http, SERVER, $cookies) {
   this.getRoommates = function() {
     let token = $cookies.get('authToken');
 
+
       $http({
       url: url + 'roommates',
       method: 'GET',
       headers:{
         auth_token: token
+      },
+      data:{
+     
       }
     }).then( (res) => {
     console.log(res);
@@ -27,6 +31,9 @@ let RoomService = function($http, SERVER, $cookies) {
       method: 'GET',
       headers:{
         auth_token: token
+      },
+      data:{
+       
       }
     })
 
