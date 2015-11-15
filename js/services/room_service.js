@@ -5,6 +5,8 @@ let RoomService = function($http, SERVER, $cookies) {
   //Display a list of all roommates
   this.getRoommates = function() {
     let token = $cookies.get('authToken');
+    let id =$cookies.get('user_id');
+    console.log(id);
 
 
       $http({
@@ -17,7 +19,7 @@ let RoomService = function($http, SERVER, $cookies) {
      
       }
     }).then( (res) => {
-    console.log(res);
+    // console.log(res);
     
   })
 
@@ -53,14 +55,22 @@ let RoomService = function($http, SERVER, $cookies) {
     let mate = new Roommate(obj);
     console.log(mate);
     let token = $cookies.get('authToken');
-    console.log(token);
+    
 
      return $http({
       url: url + 'roommates',
       method: 'POST',
       headers:{
         auth_token: token
+      },
+      data:{
+        name: mate.name,
+        email: mate.email,
+        phone: mate.phone,
+        user_id: id
       }
+    }).then((res)=>{
+      console.log(res);
     })
 
   };
