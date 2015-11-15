@@ -185,11 +185,16 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var DashController = function DashController($scope, $stateParams, UserService) {
+var DashController = function DashController($scope, $stateParams, UserService, $cookies, SERVER, $state) {
   var promise = UserService.checkAuth();
+  $scope.logMeOut = function () {
+    $cookies.remove('authToken');
+    SERVER.CONFIG.headers['X-AUTH-TOKEN'] = null;
+    $state.go('root.home');
+  };
 };
 
-DashController.$inject = ['$scope', '$stateParams', 'UserService'];
+DashController.$inject = ['$scope', '$stateParams', 'UserService', '$cookies', 'SERVER', '$state'];
 
 exports['default'] = DashController;
 module.exports = exports['default'];
