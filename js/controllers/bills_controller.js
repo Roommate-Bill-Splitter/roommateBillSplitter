@@ -11,8 +11,9 @@ let BillsController = function($scope, $http, $cookies, SERVER, sweet){
         auth_token: token
       }
   }).then((res)=>{
-    console.log(res)
+    
     $scope.roomList = res.data.bill;
+    console.log($scope.roomList);
     
   })
 
