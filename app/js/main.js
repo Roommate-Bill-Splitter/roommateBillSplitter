@@ -24,15 +24,15 @@ var config = function config($stateProvider, $urlRouterProvider, $httpProvider) 
     controller: 'ChartController',
     templateUrl: 'templates/charts.tpl.html'
   }).state('root.bills', {
-    url: '/bills/:id',
+    url: '/bills',
     controller: 'BillsController',
     templateUrl: 'templates/bills.tpl.html'
   }).state('root.indBill', {
-    url: '/bills/x:id/:billName',
+    url: '/bills/:id',
     controller: 'IndBillController',
     templateUrl: 'templates/indBill.tpl.html'
   }).state('root.addBill', {
-    url: '/bills/:id/add',
+    url: '/bills/add',
     controller: 'AddBillController',
     templateUrl: 'templates/addBill.tpl.html'
   }).state('root.editBill', {
@@ -104,9 +104,8 @@ var AddBillController = function AddBillController($scope, $stateParams, sweet, 
 
     //post request with newBill
     var token = $cookies.get('authToken');
-    console.log(token);
     $http({
-      url: SERVER.URL + 'bills',
+      url: SERVER.URL + 'bill',
       method: 'POST',
       headers: {
         auth_token: token
@@ -160,12 +159,23 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var BillsController = function BillsController($scope) {
+var BillsController = function BillsController($scope, $http, $cookies, SERVER, sweet) {
 
-  $scope.roomList = [];
+  var token = $cookies.get('authToken');
+
+  $http({
+    url: SERVER.URL + 'bill',
+    method: 'GET',
+    headers: {
+      auth_token: token
+    }
+  }).then(function (res) {
+    console.log(res);
+    $scope.roomList = res.data.bill;
+  });
 };
 
-BillsController.$inject = ['$scope'];
+BillsController.$inject = ['$scope', '$http', '$cookies', 'SERVER', 'sweet'];
 
 exports['default'] = BillsController;
 module.exports = exports['default'];
@@ -223,37 +233,73 @@ var _jquery = require('jquery');
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var EditBillController = function EditBillController($scope, sweet, $state, $http, SERVER) {
+var EditBillController = function EditBillController($scope, sweet, $state, $http, SERVER, $cookies, $stateParams) {
+
+  var token = $cookies.get('authToken');
+  var thisBill = $stateParams.id;
+
+  $http({
+    url: SERVER.URL + 'bill/' + thisBill,
+    method: 'GET',
+    headers: {
+      auth_token: token
+    },
+    data: {
+      bill_id: thisBill
+    }
+  }).then(function (res) {
+
+    $scope.results = res.data.bill;
+    console.log($scope.results);
+  });
 
   function Bill(obj) {
-    this.name = obj.name;
+    this.title = obj.title;
     this.amount = obj.amount;
-    this.due = obj.due;
+    this.due_date = obj.due_date;
+    this.user_id = obj.user_id;
   }
   $scope.editedBill = {};
   $scope.editBill = function (results) {
     //put request
     var x = new Bill(results);
     $scope.editedBill = {
-      name: x.name,
+      user_id: x.user_id,
+      title: x.title,
       amount: x.amount,
-      due: x.due
-    };
+      due_date: x.due_date
 
+    };
+    console.log($scope.editedBill);
+
+    $http({
+      url: SERVER.URL + 'bill/' + thisBill,
+      method: 'PUT',
+      headers: {
+        auth_token: token
+      },
+      data: {
+        title: $scope.editedBill.title,
+        due_date: $scope.editedBill.due_date,
+        user_id: $scope.editedBill.user_id,
+        amount: $scope.editedBill.amount
+      }
+    }).then(function (res) {
+
+      console.log(res);
+    });
     sweet.show({
       title: 'Bill Edited!',
       text: 'You are on top of this.',
       confirmButtonText: "Aight"
 
     }, function () {
-      $state.go('root.bills');
+      // $state.go('root.bills')
     });
-
-    (0, _jquery2['default'])('#addForm').validate();
   };
 };
 
-EditBillController.$inject = ['$scope', 'sweet', '$state', '$http', 'SERVER'];
+EditBillController.$inject = ['$scope', 'sweet', '$state', '$http', 'SERVER', '$cookies', '$stateParams'];
 
 exports['default'] = EditBillController;
 module.exports = exports['default'];
@@ -262,17 +308,25 @@ module.exports = exports['default'];
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
-   value: true
+  value: true
 });
 var EditRoomController = function EditRoomController($scope, RoomService, $state) {
 
-   $scope.updateRoom = function () {
-      console.log('updated');
-   };
+  //Get Roommate
+  RoomService.getRoommate($stateParams.id).then(function (res) {
+    $scope.roommate = res.data;
+  });
+  //Put Roommate
+  $scope.updateRoom = function () {
+    // console.log('updated');
+    RoomService.editRoommate(obj).then(function (res) {
+      alert("updated");
+    });
+  };
 
-   $scope.goBack = function () {
-      $state.go('root.roommates');
-   };
+  $scope.goBack = function () {
+    $state.go('root.roommates');
+  };
 };
 
 EditRoomController.$inject = ['$scope', 'RoomService', '$state'];
@@ -315,29 +369,53 @@ module.exports = exports['default'];
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
-    value: true
+  value: true
 });
-var IndBillController = function IndBillController($scope, $stateParams, sweet, $state) {
-    //get request for individual bill using $stateParams.id
-    $scope.results = //whatever
-    $scope.editBill = function () {
-        return $state.go('root.editBill');
-    };
-    $scope.deleteBill = function () {
-        sweet.show({
-            title: 'Delete this bill?',
-            text: 'Whatever you say, man.',
-            confirmButtonText: "Get rid of this thing",
-            showCancelButton: true
+var IndBillController = function IndBillController($scope, $stateParams, sweet, $state, $http, SERVER, $cookies) {
+  //get request for individual bill using $stateParams.id
+  var token = $cookies.get('authToken');
+  var thisBill = $stateParams.id;
+  $http({
+    url: SERVER.URL + 'bill/' + thisBill,
+    method: 'GET',
+    headers: {
+      auth_token: token
+    },
+    data: {
+      bill_id: thisBill
+    }
+  }).then(function (res) {
 
-        }, function () {
-            //delete request
-            $state.go('root.bills');
+    $scope.results = res.data.bill;
+    console.log($scope.results);
+
+    $scope.deleteBill = function () {
+      sweet.show({
+        title: 'Delete this bill?',
+        text: 'Whatever you say, man.',
+        confirmButtonText: "Get rid of this thing",
+        showCancelButton: true
+
+      }, function () {
+        console.log(token);
+        console.log(thisBill);
+        $http({
+          url: SERVER.URL + 'bill/' + thisBill,
+          method: 'DELETE',
+          headers: {
+            auth_token: token
+          },
+          data: {
+            bill_id: thisBill
+          }
         });
+        $state.go('root.bills');
+      });
     };
+  });
 };
 
-IndBillController.$inject = ['$scope', '$stateParams', 'sweet', '$state'];
+IndBillController.$inject = ['$scope', '$stateParams', 'sweet', '$state', '$http', 'SERVER', '$cookies'];
 
 exports['default'] = IndBillController;
 module.exports = exports['default'];
@@ -369,25 +447,34 @@ Object.defineProperty(exports, '__esModule', {
 var RoomController = function RoomController($scope, RoomService, $state) {
 
   //Get a list of all the roommates
+  RoomService.getRoommates().then(function (res) {
+    $scope.roommates = res.data;
+  });
 
+  //Go to view a single roommate
   $scope.viewRoomPage = function () {
     // console.log('View Me!');
     $state.go('root.roomBills');
   };
+
+  //Delete a roommate
   $scope.deleteRoom = function () {
     console.log('Deleted');
-    // RoomService.deleteRoommate().then( (res) => {
-    //   console.log(res);
-    // })
+    RoomService.deleteRoommate().then(function (res) {
+      console.log(res);
+    });
   };
+  //Go to the edit roommate page
   $scope.editRoomPage = function () {
     // console.log('Edited');
     $state.go('root.editRoommates');
   };
+  //Go to the add a roommate page
   $scope.addRoomPage = function () {
     // console.log('Added');
     $state.go('root.addRoommate');
   };
+  //Go back to the dashboard
   $scope.goBack = function () {
     $state.go('root.dashboard');
   };
@@ -547,13 +634,28 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var RoomService = function RoomService($http) {
+var RoomService = function RoomService($http, SERVER) {
+
+  var url = SERVER.URL;
 
   //Display a list of all roommates
-  this.getRoommates = function () {};
+  this.getRoommates = function () {
+    return $http({
+      url: url,
+      headers: SERVER.CONFIG.headers,
+      method: 'GET'
+    });
+  };
 
   //Display a single roommate
-  this.getRoommate = function () {};
+  this.getRoommate = function (id) {
+    return $http({
+      url: url + '/' + id,
+      headers: SERVER.CONFIG.headers,
+      method: 'GET'
+
+    });
+  };
 
   //Add a new roommate
   var Roommate = function Roommate(obj) {
@@ -568,14 +670,16 @@ var RoomService = function RoomService($http) {
   };
 
   //Delete a roommate
-  this.deleteRoommate = function () {
+  this.deleteRoommate = function (obj) {
     return 'deleted from service';
   };
   //Edit a roommate
-  this.editRoommate = function () {};
+  this.editRoommate = function (obj) {
+    return $http.put(url + '/' + obj.id, obj, SERVER.CONFIG);
+  };
 };
 
-RoomService.$inject = ['$http'];
+RoomService.$inject = ['$http', 'SERVER'];
 
 exports['default'] = RoomService;
 module.exports = exports['default'];
