@@ -216,6 +216,17 @@ var BillsController = function BillsController($scope, $http, $cookies, SERVER, 
 
     $scope.roomList = res.data.bill;
     console.log($scope.roomList);
+
+    $scope.roomList.map(function (y) {
+      var newList = [];
+      var id = $cookies.get('user_id');
+      // console.log(id);
+      if (y.user_id == id) {
+        newList.push(y);
+      }
+      console.log(newList);
+      $scope.newList = newList;
+    });
   });
 };
 
