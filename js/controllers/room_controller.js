@@ -1,5 +1,5 @@
 let RoomController = function($scope, RoomService, $state, $cookies, SERVER, $http){
-  console.log("test");
+  
 
 
 
@@ -21,7 +21,7 @@ let RoomController = function($scope, RoomService, $state, $cookies, SERVER, $ht
   }).then((res)=>{
     $scope.roommates = res.data.roommate;
     
-    console.log(res.data.roommate);
+    // console.log(res.data.roommate);
     
   })
 

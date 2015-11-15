@@ -7392,6 +7392,9 @@ li {
   margin-top: 3%;
   text-align: center; }
 
+.siteButtons {
+  box-shadow: 5px 5px 5px; }
+
 .homeWrapper {
   width: 100%; }
   .homeWrapper .home {
@@ -7466,7 +7469,12 @@ li {
   width: 400px;
   height: 200px;
   margin: 5%;
-  background-color: pink; }
+  float: left;
+  padding: 3%;
+  border: 3px black;
+  border-radius: 3px;
+  box-shadow: 5px 5px 5px;
+  background-color: white; }
 
 .addGoBack {
   margin: 5%; }

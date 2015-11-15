@@ -1,17 +1,52 @@
-let EditRoomController = function($scope, RoomService, $state){
+let EditRoomController = function($scope, RoomService, $state, $stateParams, $cookies, $http, SERVER){
 
-//Get Roommate
-RoomService.getRoommate($stateParams.id).then( (res) => {
-  $scope.roommate = res.data;
-});
-//Put Roommate
- $scope.updateRoom = function() {
-    // console.log('updated');
-    RoomService.editRoommate(obj).then( (res) => {
-      alert("updated");
-    });
+
+  let token = $cookies.get('authToken');
+  let id = $cookies.get('user_id');
+  let roommateId = $stateParams.id;
+
+
+  //GET
+  $http({
+      url: SERVER.URL + 'roommates/' + roommateId,
+        method: 'GET',
+        headers:{
+          auth_token: token
+        },
+        data:{
+          
+        }
+  }).then((res)=>{
     
- };
+    // $scope.results= res.data.roommate;
+    console.log(res);
+    
+  })
+
+//Put Roommate
+ // $scope.editRoommate = function(obj) {
+ //    console.log(obj);
+ //   //post request 
+ //    let token = $cookies.get('authToken');
+ //    console.log(token);
+ //    $http({
+ //      url: SERVER.URL + 'roommates' + roommateId,
+ //      method: 'POST',
+ //      headers:{
+ //        auth_token: token
+ //      }, //headers
+ //      data:{
+ //        name: obj.name,
+ //        email: obj.email,
+ //        phone: obj.phone,
+ //        user_id: id
+
+        
+ //      } //data
+
+ //     })//$http
+    
+ // };
 
  $scope.goBack = function() {
     $state.go('root.roommates');
@@ -21,6 +56,6 @@ RoomService.getRoommate($stateParams.id).then( (res) => {
 
 };
 
-EditRoomController.$inject = ['$scope', 'RoomService', '$state'];
+EditRoomController.$inject = ['$scope', 'RoomService', '$state', '$stateParams', '$cookies', '$http', 'SERVER'];
 
 export default EditRoomController;

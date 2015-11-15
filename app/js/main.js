@@ -404,26 +404,56 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var EditRoomController = function EditRoomController($scope, RoomService, $state) {
+var EditRoomController = function EditRoomController($scope, RoomService, $state, $stateParams, $cookies, $http, SERVER) {
 
-  //Get Roommate
-  RoomService.getRoommate($stateParams.id).then(function (res) {
-    $scope.roommate = res.data;
+  var token = $cookies.get('authToken');
+  var id = $cookies.get('user_id');
+  var roommateId = $stateParams.id;
+
+  //GET
+  $http({
+    url: SERVER.URL + 'roommates/' + roommateId,
+    method: 'GET',
+    headers: {
+      auth_token: token
+    },
+    data: {}
+  }).then(function (res) {
+
+    // $scope.results= res.data.roommate;
+    console.log(res);
   });
+
   //Put Roommate
-  $scope.updateRoom = function () {
-    // console.log('updated');
-    RoomService.editRoommate(obj).then(function (res) {
-      alert("updated");
-    });
-  };
+  // $scope.editRoommate = function(obj) {
+  //    console.log(obj);
+  //   //post request
+  //    let token = $cookies.get('authToken');
+  //    console.log(token);
+  //    $http({
+  //      url: SERVER.URL + 'roommates' + roommateId,
+  //      method: 'POST',
+  //      headers:{
+  //        auth_token: token
+  //      }, //headers
+  //      data:{
+  //        name: obj.name,
+  //        email: obj.email,
+  //        phone: obj.phone,
+  //        user_id: id
+
+  //      } //data
+
+  //     })//$http
+
+  // };
 
   $scope.goBack = function () {
     $state.go('root.roommates');
   };
 };
 
-EditRoomController.$inject = ['$scope', 'RoomService', '$state'];
+EditRoomController.$inject = ['$scope', 'RoomService', '$state', '$stateParams', '$cookies', '$http', 'SERVER'];
 
 exports['default'] = EditRoomController;
 module.exports = exports['default'];
@@ -539,11 +569,29 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var RoomBillController = function RoomBillController($scope, RoomService, $state, $cookies, $http, SERVER) {
+var RoomBillController = function RoomBillController($scope, RoomService, $state, $cookies, $http, SERVER, $stateParams) {
+
+  var roommateId = $stateParams.id;
+  var token = $cookies.get('authToken');
+  var id = $cookies.get('user_id');
 
   $scope.goBack = function () {
     $state.go('root.roommates');
   };
+
+  $http({
+    url: SERVER.URL + 'roommates/' + roommateId,
+    method: 'GET',
+    headers: {
+      auth_token: token
+    },
+    data: {}
+
+  }).then(function (res) {
+    $scope.roommate = res.data.roommate;
+
+    console.log(res);
+  });
 
   //Delete a roommate
   // $scope.deleteRoom = function() {
@@ -554,12 +602,15 @@ var RoomBillController = function RoomBillController($scope, RoomService, $state
   // };
   $scope.deleteRoom = function () {
     var token = $cookies.get('authToken');
-
+    console.log(roommateId);
     $http({
-      url: SERVER.URL + 'roommates',
+      url: SERVER.URL + 'roommates' + roommateId,
       method: 'DELETE',
       headers: {
         auth_token: token
+      },
+      data: {
+        id: roommateId
       }
     }).then(function (res) {
 
@@ -568,7 +619,7 @@ var RoomBillController = function RoomBillController($scope, RoomService, $state
   };
 };
 
-RoomBillController.$inject = ['$scope', 'RoomService', '$state', '$cookies', '$http', 'SERVER'];
+RoomBillController.$inject = ['$scope', 'RoomService', '$state', '$cookies', '$http', 'SERVER', '$stateParams'];
 
 exports['default'] = RoomBillController;
 module.exports = exports['default'];
@@ -580,7 +631,6 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 var RoomController = function RoomController($scope, RoomService, $state, $cookies, SERVER, $http) {
-  console.log("test");
 
   var token = $cookies.get('authToken');
   //Get a list of all the roommates
@@ -598,7 +648,7 @@ var RoomController = function RoomController($scope, RoomService, $state, $cooki
   }).then(function (res) {
     $scope.roommates = res.data.roommate;
 
-    console.log(res.data.roommate);
+    // console.log(res.data.roommate);
   });
 
   //Go to view a single roommate
