@@ -5,21 +5,23 @@
   <table >
     <tbody>
       <tr>
-        <th width="200">Name</th>
-        <th width="100">Bill</th>
-        <th width="100">Bill</th>
-        <th width="100">Bill</th>
-        <th width="100">Bill</th>
-        <th width="100">Bill</th>
-        <th width="100">Amount Due</th>
+        <th width="200">Bill</th>
+        <th width="100">#ID</th>
+        <th width="100">Amount</th>
+        <th width="100">Due Date</th>
       </tr>
 
-      <tr ng-repeat="roommate in roommates">
+      <!-- <tr ng-repeat="roommate in roommates">
         <td><a href="#/roommate/{{ roommates.id }}">{{ roommates.name }}</a></td> 
+      </tr> -->
+
+      <tr ng-repeat="bill in bills">
+        <td><a href="#">{{ bill.title }}</a></td> 
+        <td><a href="#">{{ bill.bill_id }}</a></td> 
+        <td><a href="#">{{ bill.amount }}</a></td> 
+        <td><a href="#">{{ bill.due_date }}</a></td> 
       </tr>
 
-
-      
     </tbody>
   </table>
 

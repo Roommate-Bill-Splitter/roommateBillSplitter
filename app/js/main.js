@@ -189,16 +189,52 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var ChartController = function ChartController($scope, ChartService) {
+var ChartController = function ChartController($scope, $http, $cookies, SERVER, ChartService) {
 
   $scope.title = 'Bill Chart';
 
-  ChartService.getRoommates().then(function (res) {
-    $scope.roommates = res.data.results;
+  //TEST
+  var token = $cookies.get('authToken');
+
+  //BILLS
+  $http({
+    url: SERVER.URL + 'bill',
+    method: 'GET',
+    headers: {
+      auth_token: token
+    }
+  }).then(function (res) {
+
+    $scope.bills = res.data.bill;
   });
+
+  //ROOMMATES
+  $http({
+    url: SERVER.URL + 'roommates',
+    method: 'GET',
+    headers: {
+      auth_token: token
+    }
+  }).then(function (res) {
+    console.log(res);
+    $scope.roommates = res.data.roommates;
+  });
+
+  //TEST
+
+  // ChartService.getRoommates().then ( (res) => {
+  //   $scope.roommates = res.data.roommates;
+
+  //   console.log($scope.roommates);  
+  // });
+
+  //   ChartService.getBills().then ( (res) => {
+  //     $scope.bill = res.data.bill;
+
+  //   });
 };
 
-ChartController.$inject = ['$scope', 'ChartService'];
+ChartController.$inject = ['$scope', '$http', '$cookies', 'SERVER', 'ChartService'];
 
 exports['default'] = ChartController;
 module.exports = exports['default'];
@@ -638,11 +674,21 @@ Object.defineProperty(exports, '__esModule', {
 });
 var ChartService = function ChartService($http, SERVER) {
 
-  var url = SERVER.URL + 'roommates';
+  var url1 = SERVER.URL + 'bill';
+  var url2 = SERVER.URL + 'roommates';
+
+  this.getBills = function () {
+    return $http({
+      url: url,
+      headers: SERVER.CONFIG.headers,
+      method: 'GET',
+      cache: true
+    });
+  };
 
   this.getRoommates = function () {
     return $http({
-      url: url,
+      url2: url2,
       headers: SERVER.CONFIG.headers,
       method: 'GET',
       cache: true
