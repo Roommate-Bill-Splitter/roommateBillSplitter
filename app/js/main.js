@@ -308,17 +308,25 @@ module.exports = exports['default'];
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
-   value: true
+  value: true
 });
 var EditRoomController = function EditRoomController($scope, RoomService, $state) {
 
-   $scope.updateRoom = function () {
-      console.log('updated');
-   };
+  //Get Roommate
+  RoomService.getRoommate($stateParams.id).then(function (res) {
+    $scope.roommate = res.data;
+  });
+  //Put Roommate
+  $scope.updateRoom = function () {
+    // console.log('updated');
+    RoomService.editRoommate(obj).then(function (res) {
+      alert("updated");
+    });
+  };
 
-   $scope.goBack = function () {
-      $state.go('root.roommates');
-   };
+  $scope.goBack = function () {
+    $state.go('root.roommates');
+  };
 };
 
 EditRoomController.$inject = ['$scope', 'RoomService', '$state'];
@@ -438,25 +446,34 @@ Object.defineProperty(exports, '__esModule', {
 var RoomController = function RoomController($scope, RoomService, $state) {
 
   //Get a list of all the roommates
+  RoomService.getRoommates().then(function (res) {
+    $scope.roommates = res.data;
+  });
 
+  //Go to view a single roommate
   $scope.viewRoomPage = function () {
     // console.log('View Me!');
     $state.go('root.roomBills');
   };
+
+  //Delete a roommate
   $scope.deleteRoom = function () {
     console.log('Deleted');
-    // RoomService.deleteRoommate().then( (res) => {
-    //   console.log(res);
-    // })
+    RoomService.deleteRoommate().then(function (res) {
+      console.log(res);
+    });
   };
+  //Go to the edit roommate page
   $scope.editRoomPage = function () {
     // console.log('Edited');
     $state.go('root.editRoommates');
   };
+  //Go to the add a roommate page
   $scope.addRoomPage = function () {
     // console.log('Added');
     $state.go('root.addRoommate');
   };
+  //Go back to the dashboard
   $scope.goBack = function () {
     $state.go('root.dashboard');
   };
@@ -616,13 +633,28 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var RoomService = function RoomService($http) {
+var RoomService = function RoomService($http, SERVER) {
+
+  var url = SERVER.URL;
 
   //Display a list of all roommates
-  this.getRoommates = function () {};
+  this.getRoommates = function () {
+    return $http({
+      url: url,
+      headers: SERVER.CONFIG.headers,
+      method: 'GET'
+    });
+  };
 
   //Display a single roommate
-  this.getRoommate = function () {};
+  this.getRoommate = function (id) {
+    return $http({
+      url: url + '/' + id,
+      headers: SERVER.CONFIG.headers,
+      method: 'GET'
+
+    });
+  };
 
   //Add a new roommate
   var Roommate = function Roommate(obj) {
@@ -637,14 +669,16 @@ var RoomService = function RoomService($http) {
   };
 
   //Delete a roommate
-  this.deleteRoommate = function () {
+  this.deleteRoommate = function (obj) {
     return 'deleted from service';
   };
   //Edit a roommate
-  this.editRoommate = function () {};
+  this.editRoommate = function (obj) {
+    return $http.put(url + '/' + obj.id, obj, SERVER.CONFIG);
+  };
 };
 
-RoomService.$inject = ['$http'];
+RoomService.$inject = ['$http', 'SERVER'];
 
 exports['default'] = RoomService;
 module.exports = exports['default'];
