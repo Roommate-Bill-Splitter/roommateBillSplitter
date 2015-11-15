@@ -15,10 +15,11 @@
       </tr>
 
       <tr ng-repeat="roommate in roommates">
-        <td>{{ obj.roommate.name }}</td> 
-        <td>{{ obj.bill }}</td> 
-
+        <td><a href="#/roommate/{{ roommates.id }}">{{ roommates.name }}</a></td> 
       </tr>
+
+
+      
     </tbody>
   </table>
 

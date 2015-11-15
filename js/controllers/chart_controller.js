@@ -8,6 +8,8 @@ let ChartController = function($scope, ChartService) {
 
   
 
+  
+
 };
 
 ChartController.$inject = ['$scope', 'ChartService'];

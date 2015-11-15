@@ -616,12 +616,12 @@ Object.defineProperty(exports, '__esModule', {
 });
 var ChartService = function ChartService($http, SERVER) {
 
-  var url = SERVER.URL + 'roommate/';
+  var url = SERVER.URL + 'roommates';
 
   this.getRoommates = function () {
     return $http({
       url: url,
-      headers: SERVER.CONFIG.header,
+      headers: SERVER.CONFIG.headers,
       method: 'GET',
       cache: true
     });
