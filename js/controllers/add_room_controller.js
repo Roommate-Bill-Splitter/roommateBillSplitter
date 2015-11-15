@@ -1,17 +1,15 @@
 let AddRoomController = function($scope, RoomService, $state, sweet){
 
-
+ 
   $scope.addRoommate = (obj) => {
+    console.log(obj);
+    // let token = $cookies.get('authToken');
     RoomService.addRoommate(obj).then( (res) => {
    
-        sweet.show({
-          title:'Roommate Added!',
-          text: 'Congrats.',
-          confirmButtonText: "K cool"
-      }, function(){
+      
         $state.go('root.roommates')
         $scope.roomate={};
-      });
+  
     });//RoomService
   }
 
