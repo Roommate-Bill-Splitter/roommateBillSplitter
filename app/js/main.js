@@ -168,9 +168,9 @@ var AddRoomController = function AddRoomController($scope, RoomService, $state, 
         auth_token: token
       }, //headers
       data: {
-        name: obj.name,
-        email: obj.email,
-        phone: obj.phone
+        name: mate.name,
+        email: mate.email,
+        phone: mate.phone
 
       } //data
 
