@@ -1,7 +1,6 @@
 let ChartService = function($http, SERVER) {
 
-
-  let url = SERVER.URL + 'classes/roommate';
+  let url = SERVER.URL + 'roommate/';
 
 
   this.getRoommates = function () {

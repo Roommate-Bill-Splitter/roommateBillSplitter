@@ -168,7 +168,7 @@ Object.defineProperty(exports, '__esModule', {
 var ChartController = function ChartController($scope, ChartService) {
 
   $scope.title = 'Bill Chart';
-  //
+
   ChartService.getRoommates().then(function (res) {
     $scope.roommates = res.data.results;
   });
@@ -511,7 +511,7 @@ Object.defineProperty(exports, '__esModule', {
 });
 var ChartService = function ChartService($http, SERVER) {
 
-  var url = SERVER.URL + 'classes/roommate';
+  var url = SERVER.URL + 'roommate/';
 
   this.getRoommates = function () {
     return $http({
