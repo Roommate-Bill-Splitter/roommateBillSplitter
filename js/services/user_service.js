@@ -3,15 +3,13 @@ let UserService = function($http, SERVER, $cookies, $state, sweet) {
   this.checkAuth = function() {
 
     let token = $cookies.get('authToken');
+    let id= $cookies.get('user_id');
+    
 
-    if (!token) {
-      sweet.show({
-        title:'You are not logged in',
-        text: "What's up with that?",
-        confirmButtonText: "K",
-      })
-      $state.go('root.home');
-    }
+    if (token) {
+      
+      $state.go('root.dashboard');
+    } 
   }
 
   let user = function (obj) {
@@ -27,13 +25,20 @@ let UserService = function($http, SERVER, $cookies, $state, sweet) {
     
     let u = new user(obj);
     
-    return $http.post(SERVER.URL +'signup', u)
+    return $http.post(SERVER.URL +'signup', u).then((res)=>{
+      console.log(res);
+      $cookies.put('authToken', res.data.user.auth_token);
+      $cookies.put('user_id', res.data.user.id);
+      SERVER.CONFIG.headers['X-AUTH-TOKEN'] = res.data.user.auth_token;
+      $state.go('root.dashboard')
+    })
   }
 
   this.sendLogin = function(userObj){
     $http.post(SERVER.URL + 'login', userObj, SERVER.CONFIG).then((res)=>{
       console.log(res);
       $cookies.put('authToken', res.data.user.auth_token);
+      $cookies.put('user_id', res.data.user.id);
       SERVER.CONFIG.headers['X-AUTH-TOKEN'] = res.data.user.auth_token;
       $state.go('root.dashboard')
     });

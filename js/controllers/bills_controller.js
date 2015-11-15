@@ -3,6 +3,8 @@ let BillsController = function($scope, $http, $cookies, SERVER, sweet){
   
 
   let token = $cookies.get('authToken');
+  let id = $cookies.get('user_id');
+  
 
   $http({
     url: SERVER.URL + 'bill',

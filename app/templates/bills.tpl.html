@@ -1,10 +1,10 @@
 <div class="billMain">
-<h3><a href="#/bills/add">Add Bill</a><h3>
+<h3 class="addBtn"><a href="#/bills/add">Add Bill</a><h3>
 
-  <ul> 
-    <li ng-repeat="b in roomList">
+  <ul class="billList"> 
+    <li ng-repeat="b in roomList" class="indBill">
       <a href="#/bills/{{b.bill_id}}">
-      {{b.title}}: {{b.amount}}
+      {{b.title}}: ${{b.amount}}
       </a>
     </li>
   </ul>

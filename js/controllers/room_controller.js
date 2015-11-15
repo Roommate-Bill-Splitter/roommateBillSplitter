@@ -3,10 +3,8 @@ let RoomController = function($scope, RoomService, $state){
 
 
   //Get a list of all the roommates
-  RoomService.getRoommates().then( (res) => {
-    console.log(res);
-    $scope.roommates = (res.data);
-  })
+  RoomService.getRoommates();
+  
 
   //Go to view a single roommate
   $scope.viewRoomPage = function() {

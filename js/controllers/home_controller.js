@@ -4,10 +4,10 @@ let HomeController = function($scope, UserService, $cookies, $state){
   $scope.create = function(user){
 
     
-    UserService.create(user).then((res)=>{
-      console.log(res);
-    $state.go('root.dashboard');
-    });
+    UserService.create(user);
+
+    // $state.go('root.dashboard');
+    
 
   }
 
