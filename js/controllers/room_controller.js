@@ -1,11 +1,25 @@
-let RoomController = function($scope, RoomService, $state){
+let RoomController = function($scope, RoomService, $state, $cookies, SERVER, $http){
   console.log("test");
 
-
+ let token = $cookies.get('authToken');
   //Get a list of all the roommates
-  RoomService.getRoommates().then( (res) => {
+  // RoomService.getRoommates().then( (res) => {
+  //   console.log(res);
+  //   $scope.roommates = (res.data);
+  // })
+ //------------------------------------------------
+
+  $http({
+    url: SERVER.URL + 'roommates',
+      method: 'GET',
+      headers:{
+        auth_token: token
+      }
+  }).then((res)=>{
+    
+    
     console.log(res);
-    $scope.roommates = (res.data);
+    
   })
 
   //Go to view a single roommate
@@ -41,6 +55,6 @@ let RoomController = function($scope, RoomService, $state){
 
 };
 
-RoomController.$inject = ['$scope', 'RoomService', '$state'];
+RoomController.$inject = ['$scope', 'RoomService', '$state', '$cookies','SERVER', '$http'];
 
 export default RoomController;
