@@ -280,20 +280,8 @@ var HomeController = function HomeController($scope, UserService, $cookies, $sta
     });
   };
 
-  var promise = UserService.checkAuth();
-
-  if (promise) {
-    promise.then(function (res) {
-      console.log(res);
-      if (res.data.status === 'Authentication failed.') {
-        $state.go('root.login');
-      } else {
-        $scope.message = 'I am logged in';
-      }
-    });
-  }
-
   $scope.login = function (user) {
+
     UserService.sendLogin(user);
   };
 
@@ -615,23 +603,11 @@ var UserService = function UserService($http, SERVER, $cookies, $state) {
   };
 
   this.sendLogin = function (userObj) {
-<<<<<<< HEAD
-    return $http.post(SERVER.URL + 'login', userObj, SERVER.CONFIG);
-  };
-
-  this.loginSuccess = function (res) {
-
-    console.log(res);
-    $cookies.put('authToken', res.data.user.auth_token);
-    SERVER.CONFIG.headers['X-AUTH-TOKEN'] = res.data.user.auth_token;
-    $state.go('root.dashboard');
-=======
     $http.post(SERVER.URL + 'login', userObj, SERVER.CONFIG).then(function (res) {
       $cookies.put('authToken', res.data.user.auth_token);
       SERVER.CONFIG.headers['X-AUTH-TOKEN'] = res.data.user.auth_token;
       $state.go('root.dashboard');
     });
->>>>>>> 59216c8c7b8149e7676e5b82d29c9c2d8636d085
   };
 
   this.logout = function () {
