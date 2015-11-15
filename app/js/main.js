@@ -585,21 +585,17 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-var _jquery = require('jquery');
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
 var UserService = function UserService($http, SERVER, $cookies, $state) {
 
   this.checkAuth = function () {
 
     var token = $cookies.get('authToken');
+
     if (token) {
-      console.log('welcome');
-    };
+      return $http.get(SERVER.URL, SERVER.CONFIG);
+    } else {
+      $state.go('root.home');
+    }
   };
 
   var user = function user(obj) {
@@ -619,6 +615,7 @@ var UserService = function UserService($http, SERVER, $cookies, $state) {
 
   this.sendLogin = function (userObj) {
     $http.post(SERVER.URL + 'login', userObj, SERVER.CONFIG).then(function (res) {
+      console.log(res);
       $cookies.put('authToken', res.data.user.auth_token);
       SERVER.CONFIG.headers['X-AUTH-TOKEN'] = res.data.user.auth_token;
       $state.go('root.dashboard');
@@ -637,7 +634,7 @@ UserService.$inject = ['$http', 'SERVER', '$cookies', '$state'];
 exports['default'] = UserService;
 module.exports = exports['default'];
 
-},{"jquery":24}],18:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 /**
  * @license AngularJS v1.4.7
  * (c) 2010-2015 Google, Inc. http://angularjs.org
