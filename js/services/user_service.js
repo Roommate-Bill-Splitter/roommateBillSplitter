@@ -1,12 +1,15 @@
-let UserService = function($http, SERVER, $cookies, $state) {
+let UserService = function($http, SERVER, $cookies, $state, sweet) {
   
   this.checkAuth = function() {
 
     let token = $cookies.get('authToken');
 
-    if (token) {
-      return  $http.get(SERVER.URL, SERVER.CONFIG);
-    } else {
+    if (!token) {
+      sweet.show({
+        title:'You are not logged in',
+        text: "What's up with that?",
+        confirmButtonText: "K",
+      })
       $state.go('root.home');
     }
   }
@@ -45,6 +48,6 @@ let UserService = function($http, SERVER, $cookies, $state) {
 };
   
 
-UserService.$inject = ['$http', 'SERVER', '$cookies', '$state'];
+UserService.$inject = ['$http', 'SERVER', '$cookies', '$state', 'sweet'];
 
 export default UserService;
